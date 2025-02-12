@@ -1,4 +1,4 @@
-#GymBros
+# GymBros
 
 ## 📋 Integrantes del equipo de desarrollo
 
