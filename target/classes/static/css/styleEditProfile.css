@@ -1,0 +1,139 @@
+.goBackButtonContainer{
+    height: 30px;
+    width: 30px;
+}
+.goBackButton{
+    padding-top: 3px;
+    padding-left: 2px;
+    background-color: #d63031;
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+    border:none;
+}
+.goBackButton:hover{
+    transform: scale(1.05);
+}
+.goBackButton img{
+    height: 25px;
+    width: 25px;
+}
+.userImage{
+    text-align: center;
+}
+.userImage img {
+    width: 150px;
+}
+.editImageInputContainer {
+    text-align: center;
+}
+.editImageButton {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    border-radius: 5px;
+    background: linear-gradient(to bottom, royalblue, dodgerblue);
+    border: none;
+    height: 30px;
+    width: 120px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    line-height: 30px;
+}
+.editImageInput {
+    position: absolute;
+    font-size: 100px;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.editImageButtonText {
+    position: relative;
+    z-index: 1;
+
+}
+.editImageButton:hover{
+    transform: scale(1.05);
+}
+.eyeImage{
+    height: 30px;
+    width: 30px;
+}
+.passwordContainer{
+    align-items: center;
+    display: flex;
+}
+.title{
+    color: white;
+    font-size: 18px;
+    margin-left: 3px;
+}
+.field{
+    color: white;
+    background-color: #333;
+    border-color: #636e72;
+    border-radius: 5px;
+    height: 30px;
+    width: 300px;
+    margin-left: 3px;
+}
+.select{
+    color: white;
+    background-color: #333;
+    border-color: #636e72;
+    border-radius: 5px;
+    margin-left: 3px;
+    height: 37px;
+    width: 307px;
+}
+.numeric{
+    margin-left: 5px;
+    color: white;
+    background-color: #333;
+    border-color: #636e72;
+    border-radius: 5px;
+    width: 303px;
+    height: 31px;
+}
+/*Hide arrows*/
+input[type=number] { /*for firefox*/
+    -moz-appearance: textfield;
+    appearance: textfield;
+    margin: 0;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { /*for Chrome*/
+    -webkit-appearance: none;
+    margin: 0;
+}
+/*Hide arrows*/
+.lowerButtonsContainer{
+    display: flex;
+    justify-content: center;
+}
+.cancelButton, .saveButton{
+    border-radius: 5px;
+    border:none;
+    height: 30px;
+    width: 100px;
+    color: white;
+    font-size: 15px;
+}
+.cancelButton{
+    background-color: #d63031;
+    margin-right: 10px;
+}
+.cancelButton:hover{
+    transform: scale(1.05);
+}
+.saveButton:hover{
+    transform: scale(1.05);
+}
+.saveButton{
+    background-color: limegreen;
+}
+body{
+    background-color: #333;
+    font-family: Arial, serif;
+}

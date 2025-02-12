@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalle del alimento</title>
+    <link rel="stylesheet" href="/css/styleDetailsFood.css">
+    <script>
+        function deleteFood(){
+            let confirmation = confirm('¿Estás seguro de querer eliminar este alimento?');
+            if(confirmation){
+                window.location.href = "/ListFoods/DeleteFood/{{food.id}}?nutritionId={{nutritionId}}";
+            }
+        }
+    </script>
+</head>
+<body>
+<header>
+    <nav>
+        <h2 class="logo"></h2>
+        <ul>
+            <a href="/ListFoods?nutritionId={{nutritionId}}">volver</a>
+        </ul>
+    </nav>
+</header>
+<div class="details">
+    <div class="blackSpace"></div>
+    <form class="atributes">
+        <p>Nombre: {{food.name}}</p>
+        <p>Calorias: {{food.calories}}</p>
+        <p>Tipo: {{food.type}}</p>
+        <br><br>
+        <a href="/ListFoods/addFood?nutritionId={{nutritionId}}&foodId={{food.id}}" class="boton">Agregar alimento</a>
+        <br><br>
+        <a href="/ListFoods/ModifyFood/{{food.id}}?nutritionId={{nutritionId}}" class="boton">Editar alimento</a>
+        <br><br>
+        <a onclick="deleteFood()" class="boton">Eliminar alimento</a>
+    </form>
+</div>
+<div class="blackSpace"></div>
+</div>
+</body>
+</html>

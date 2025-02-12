@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e49554df-54f3-44d2-8de2-6659110b7c49" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2gYKHofLx6nEjyrQTqBB2oNmv4r" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.RunApplication.executor&quot;: &quot;Run&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/vcand/OneDrive - Universidad Rey Juan Carlos/Escritorio/URJC/URJC 23-24/SD/Practica 2 en solitario/practica2_ssdd-main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="RunApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="PracticaWeb" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ssdd.practicaWeb.RunApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-19.0.2-corretto-19.0.2-4caba194b151-48ba4555" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e49554df-54f3-44d2-8de2-6659110b7c49" name="Changes" comment="" />
+      <created>1715868986945</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1715868986945</updated>
+      <workItem from="1715868988847" duration="3444000" />
+      <workItem from="1716131824440" duration="2147000" />
+      <workItem from="1716304304870" duration="400000" />
+      <workItem from="1716399516906" duration="94000" />
+      <workItem from="1716480725588" duration="5671000" />
+      <workItem from="1716487212041" duration="429000" />
+      <workItem from="1716488012398" duration="28000" />
+      <workItem from="1716984429167" duration="903000" />
+      <workItem from="1716987691737" duration="456000" />
+      <workItem from="1716988554077" duration="1555000" />
+      <workItem from="1718886201911" duration="20096000" />
+      <workItem from="1718991150510" duration="544000" />
+      <workItem from="1718991756694" duration="1268000" />
+      <workItem from="1719309206986" duration="7728000" />
+      <workItem from="1719403523774" duration="2420000" />
+      <workItem from="1719412876605" duration="2253000" />
+      <workItem from="1719707223991" duration="25019000" />
+      <workItem from="1720448844827" duration="65000" />
+      <workItem from="1738580961875" duration="704000" />
+      <workItem from="1738581787900" duration="24000" />
+      <workItem from="1738581835057" duration="964000" />
+      <workItem from="1738584216572" duration="905000" />
+      <workItem from="1738659079125" duration="303000" />
+      <workItem from="1738844422902" duration="2808000" />
+      <workItem from="1739011924235" duration="2414000" />
+      <workItem from="1739283493060" duration="383000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="com.samskivert.mustache.MustacheException$Context" package="com.samskivert.mustache" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/entities/Routine.java</url>
+          <line>10</line>
+          <properties field="routineName" class="ssdd.practicaWeb.entities.Routine" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

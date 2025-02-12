@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Datos de la Rutina</title>
+    <link rel="stylesheet" href="/css/styleShowRoutine.css">
+    <script>
+        function deleteRoutine(){
+            let confirmation = confirm('¿Estás seguro de querer eliminar esta rutina?');
+            if(confirmation){
+                window.location.href = "/routines/delete/{{routine.id}}?userId={{userId}}";
+            }
+        }
+    </script>
+</head>
+<body>
+<header>
+    <nav>
+        <ul class="list">
+            <a href="/routines/editRoutine/{{routine.id}}?userId={{userId}}">Editar Rutina</a>
+            <a onclick="deleteRoutine()" >Eliminar Rutina</a>
+            <a href="/routines?userId={{userId}}">Volver a las rutinas</a>
+        </ul>
+    </nav>
+</header>
+<div class="details">
+    <div class="blackSpace"></div>
+    <div class="atributes">
+        <h1>Rutina {{routine.id}} - {{routine.routineName}}</h1>
+        <p>Nombre: {{routine.routineName}}</p>
+        <p>Intensidad: {{routine.intensity}}</p>
+        <p>Duración: {{routine.duration}}</p>
+        <p>Ejercicios:</p>
+        <p>{{routine.exercises}}</p>
+        <p>Objetivo: {{routine.goal}}</p>
+    </div>
+    <div class="blackSpace"></div>
+</div>
+</body>
+</html>

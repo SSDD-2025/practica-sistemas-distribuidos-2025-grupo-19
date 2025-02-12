@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Nutrition</title>
+    <link rel="stylesheet" href="/css/styleCreateNutrition.css">
+    <script>
+        function validateForm() {
+            let name = document.forms["formUpdateNutrition"]["name"].value;
+            let type = document.forms["formUpdateNutrition"]["type"].value;
+            if (name === "" || type === "") {
+                alert("Todos los campos son obligatorios");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+<header>
+    <nav>
+        <h2 class="logo"></h2>
+        <ul>
+            <a href="/ListNutrition?userId={{userId}}"><li>VOLVER</li></a>
+        </ul>
+    </nav>
+</header>
+<div class="create">
+    <div class="blackSpace"></div>
+    <div class="boxAtributes">
+        <h1>Crea tu propia nutricion</h1>
+        {{#succesfull}}
+            <p>Nutricion creada</p>
+        {{/succesfull}}
+        <form name="formUpdateNutrition" action="/ListNutrition/CreateNutrition?userId={{userId}}" method="post" onsubmit="return validateForm()">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="type">Tipo:</label>
+        <input type="text" id="type" name="type" required><br><br>
+        <input type="submit" value="Agregar Alimentos">
+        </form>
+    </div>
+    <div class="blackSpace"></div>
+</div>
+</body>
+</html>

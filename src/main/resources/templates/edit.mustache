@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar perfil</title>
+    <link rel="stylesheet" href="/css/styleEditProfile.css">
+    <script>
+        let flag = true;
+        function visualizeEye() {
+            if(flag){
+                document.getElementById("password").type = "password";
+                document.getElementById("Eye").src = "/images/openedEye.png";
+                flag=false;
+            }else{
+                document.getElementById("password").type = "text";
+                document.getElementById("Eye").src = "/images/closedEye.png";
+                flag=true;
+            }
+        }
+        function goBackwards(){
+            window.location.href = "/users/{{user.id}}";
+        }
+        function validateForm(){
+            let username = document.getElementById("username").value;
+            if(username === ""){
+                alert("Longitud en el nombre de usuario no válida (nombre vacío).");
+                return false;
+            }
+            if(username.length < 6){
+                alert("Longitud en el nombre de usuario no válida (muy pequeño).");
+                return false;
+            }
+            if(username.length > 10){
+                alert("Longitud en el nombre de usuario no válida (muy largo).");
+                return false;
+            }
+            let password = document.getElementById("password").value;
+            if(password.length < 6){
+                alert("Contraseña muy corta. Introduzca una más larga.");
+                return false;
+            }
+            if(password.length > 10){
+                alert("Contraseña muy larga. Introduzca una más corta.");
+                return false;
+            }
+            let height = document.getElementById("height").value;
+            if(height < 50 || height > 280){
+                alert("Altura no válida. Recuerda que es en centímetros.");
+                return false;
+            }
+            let age = document.getElementById("age").value;
+            if(age < 3 || age > 130){
+                alert("Edad no válida.");
+                return false;
+            }
+            let weight = document.getElementById("weight").value;
+            if(weight < 15 || weight > 300){
+                alert("Peso no válido. Recuerda que es en kilogramos");
+                return false;
+            }
+            let goalWeight = document.getElementById("goalWeight").value;
+            if(goalWeight < 15 || goalWeight > 300){
+                alert("Peso no válido. Recuerda que es en kilogramos");
+                return false;
+            }
+            return true;
+        }
+        function editImage(){
+            let userImage = document.getElementById("uImage");
+            let input = document.getElementById("editImageInput");
+            if(input.files && input.files[0]){
+                let reader = new FileReader();
+                reader.onload = function(e){
+                    userImage.src = e.target.result;
+                    document.getElementById("userImage").value = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }else{
+                document.getElementById("userImage").value = "{{user.userImage}}";
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="goBackButtonContainer">
+    <button type="button" class="goBackButton" onclick="goBackwards()">
+        <img src="/images/goBack.jpg" alt="arrowPreviousPage">
+    </button>
+</div>
+<div class="userImage">
+    <img src="{{user.userImage}}" id="uImage" alt="User photo">
+</div>
+<div class="editImageInputContainer">
+    <label for="editImageInput" class="editImageButton">
+        <input type="file" id="editImageInput" accept="image/*" class="editImageInput" onchange="editImage()">
+        <span class="editImageButtonText">Editar imagen</span>
+    </label>
+</div>
+<br>
+<form action="/users/edit/{{user.id}}" method="post" onsubmit="return validateForm()" accept-charset="UTF-8">
+    <input type="hidden" name="userImage" id="userImage" value="{{user.userImage}}">
+    <label for="username" class="title">Nombre de usuario</label><br>
+    <input id="username" name="username" type="text" class="field" value={{user.username}}
+           placeholder={{user.username}} minlength="6" maxlength="10">
+    <br><br>
+    <label for="password" class="title">Contraseña</label><br>
+    <span class="passwordContainer">
+                <input name="password" id="password" type="password" class="field" minlength="6" maxlength="10" value={{user.password}}>
+                <img class="eyeImage" src="/images/openedEye.png" id="Eye" onclick="visualizeEye()" alt="Visualize password"><!-- foto ojo y funcion-->
+            </span>
+    <br>
+    <label for="gender" class="title">Género</label><br>
+    <select name="gender"  class="select" id="gender">
+        <option>Masculino</option>
+        <option>Femenino</option>
+    </select>
+    <br><br>
+    <label for="height" class="title">Altura</label><br>
+    <input id="height" name="height" type="number" inputmode="numeric" step="1"
+           min="50" max="280" class="numeric" placeholder=
+        {{#user.height}}
+            {{user.height}}
+        {{/user.height}}
+        {{^user.height}}
+        cm
+        {{/user.height}}
+           value=
+        {{#user.height}}
+            {{user.height}}
+        {{/user.height}}>
+    <br><br>
+    <label for="age" class="title">Edad</label><br>
+    <input id="age" name="age" type="number" inputmode="numeric" step="1"
+           min="3" max="130" class="numeric" placeholder=
+        {{#user.age}}
+            {{user.age}}
+        {{/user.age}}
+        {{^user.age}}
+        Edad
+        {{/user.age}}
+           value=
+        {{#user.age}}
+            {{user.age}}
+        {{/user.age}}>
+    <br><br>
+    <label for="weight" class="title">Peso</label><br>
+    <input id="weight" name="weight" type="number" inputmode="numeric" step="1"
+           min="15" max="300" class="numeric" placeholder=
+        {{#user.weight}}
+            {{user.weight}}
+        {{/user.weight}}
+        {{^user.weight}}
+        Kg
+        {{/user.weight}}
+           value=
+        {{#user.weight}}
+            {{user.weight}}
+        {{/user.weight}}>
+    <br><br>
+    <label for="goalWeight" class="title">Peso objetivo</label><br>
+    <input id="goalWeight" name="goalWeight" type="number" inputmode="numeric" step="1"
+           min="15" max="300" class="numeric" placeholder=
+        {{#user.goalWeight}}
+            {{user.goalWeight}}
+        {{/user.goalWeight}}
+        {{^user.goalWeight}}
+        Kg
+        {{/user.goalWeight}}
+           value=
+        {{#user.goalWeight}}
+            {{user.goalWeight}}
+        {{/user.goalWeight}}>
+    <br><br>
+    <label for="morphology" class="title">Morfología</label><br>
+    <select name="morphology" class="select" id="morphology">
+        <option>Ectomorfo</option> <!-- Al pasar el cursor añadir explicacion-->
+        <option>Endomorfo</option>
+        <option>Mesomorfo</option>
+    </select>
+    <br><br>
+    <label for="caloricPhase" class="title">Etapa calórica</label><br>
+    <select name="caloricPhase" class="select" id="caloricPhase">
+        <option>Definicion</option><!-- Añadir también explicación-->
+        <option>Mantenimiento</option>
+        <option>Volumen</option>
+    </select>
+    <br><br>
+    <span class="lowerButtonsContainer">
+                <button class="cancelButton" type="button" onclick="goBackwards()">Cancelar</button>
+                <button class="saveButton" type="submit">Guardar</button>
+            </span>
+</form>
+</body>
+</html>

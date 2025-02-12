@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar rutina</title>
+    <link rel="stylesheet" href="/css/styleEditRoutine.css">
+    <script>
+        function goBackwards(){
+            window.location.href = "/routines/{{routine.id}}?userId={{userId}}";
+        }
+        function validateForm(){
+            let routineName = document.forms["editForm"]["routineName"].value;
+            console.log(routineName)
+            if(routineName === ""){
+                alert("Longitud en el nombre de la rutina no válida (nombre vacío).");
+                return false;
+            }
+            if(routineName.length > 30){
+                alert("Longitud en el nombre de la rutina no válida (muy largo).");
+                return false;
+            }
+            let duration = document.forms["editForm"]["duration"].value;
+            if(duration < 1){
+                alert("Duración no válida. Recuerda que la duración se mide en números (minutos).");
+                return false;
+            }
+            if(duration > 200){
+                alert("No debes exceder las 6 horas de entrenamiento, esto puede ser malo para tu salud");
+                return false;
+            }
+            let exercises = document.forms["editForm"]["exercises"].value;
+            if(exercises.length < 5){
+                alert("Longitud incorrecta. Por favor rellene este campo.");
+                return false;
+            }
+            if(exercises.length > 255){
+                alert("Longitud excedida: 255 caracteres como máximo");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+<div class="goBackButtonContainer">
+    <button type="button" class="goBackButton" onclick="goBackwards()">
+        <img src="/images/goBack.jpg" alt="arrowPreviousPage">
+    </button>
+</div>
+<br>
+<form name="editForm" method="post" onsubmit="return validateForm()" action="/routines/editRoutine/{{routine.id}}?userId={{userId}}">
+<label for="routineName" class="title">Nombre de la rutina</label><br>
+<input id="routineName" name="routineName" type="text" class="field" value="{{routine.routineName}}"
+       placeholder={{routine.routineName}}>
+<br><br>
+<label for="intensity" class="title">Intensidad</label><br>
+<select name="intensity"  class="select" id="intensity">
+    <option>Baja</option>
+    <option>Moderada</option>
+    <option>Alta</option>
+</select>
+<br><br>
+<label for="duration" class="title">Duracion de la rutina</label><br>
+<input id="duration" name="duration" type="number" inputmode="numeric" class="numeric"
+       min="1" max="200" value={{routine.duration}} placeholder={{routine.duration}}>
+<br><br>
+<label for="exercises" class="title">Ejercicios de la rutina</label><br>
+<textarea name="exercises" class="textarea" id="exercises" rows="10" cols="70" placeholder="{{routine.exercises}}">
+    {{routine.exercises}}
+</textarea>
+<br><br>
+<label for="goal" class="title">Objetivo</label><br>
+<select name="goal"  class="select" id="goal">
+    <option>Bajar de peso</option>
+    <option>Mantenerse</option>
+    <option>Subir de peso</option>
+</select>
+<br><br>
+<span class="lowerButtonsContainer">
+                <button class="cancelButton" type="button" onclick="goBackwards()">Cancelar</button>
+                <button class="saveButton" type="submit">Guardar</button>
+            </span>
+</form>
+</body>
+</html>
