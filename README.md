@@ -12,7 +12,7 @@ Las principales entidades de la aplicación son:
 - **Nutrición**: Planes alimenticios personalizados según los objetivos del usuario.
 - **Entrenamiento**: Rutinas de ejercicios personalizadas.
 
-- ## 🔑 Permisos de los usuarios
+## 🔑 Permisos de los usuarios
 - **Anónimo**: Puede ver los diferentes entreamientos y rutinas disponibles pero sin poder editarlos o eliminarlos, puede registrarse
 - **Registrado**: Puede acceder a sus planes de entrenamiento, puede acceder a sus planes de dietas, puede editar y eliminar los planes de ambos ambitos que hayan sido creado por ellos.
 - **Admin**: Tiene todos los permisos de un usuario registrado y permisos para crear planes de entrenamiento y de dietas, así como editarlos o eliminarlos.
