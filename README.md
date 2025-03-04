@@ -11,6 +11,9 @@ Las principales entidades de la aplicación son:
 - **Usuario**: Clientes del gimnasio que pueden acceder a planes de entrenamientos y de dietas.
 - **Nutrición**: Planes alimenticios personalizados según los objetivos del usuario.
 - **Entrenamiento**: Rutinas de ejercicios personalizadas.
+- **Comida**: Comidas que tienen las nutriciones (dietas)
+![image](https://github.com/user-attachments/assets/adbb72fd-ade0-4997-8bf7-ec902c2f8e18)
+
 
 ## 🔑 Permisos de los usuarios
 - **Anónimo**: Puede ver los diferentes entreamientos y rutinas disponibles pero sin poder editarlos o eliminarlos, puede registrarse
@@ -73,11 +76,14 @@ Las principales entidades de la aplicación son:
   ![image](https://github.com/user-attachments/assets/8117b15e-067e-4802-8a09-ff4466e60b8f)
   Esta pantalla se muestra si se ha producido un error 404 (url not found)
 
- 
-  
+## Diagrama de navegación
+- Nota: desde cualquier página se puede llegar a la página de error 404 o error 500
+![image](https://github.com/user-attachments/assets/aa633236-b0dc-4547-8863-0768930d7a48)
+
+## Diagrama con las entidades de la base de datos
+![image](https://github.com/user-attachments/assets/d629588d-1e9f-4cad-ade0-2abfac4d74f3)
+
+## Diagrama de clases y templates
 
 
-  
-
-## Diagramas de la aplicación 
 
