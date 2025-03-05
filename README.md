@@ -78,12 +78,14 @@ Las principales entidades de la aplicación son:
 
 ## Diagrama de navegación
 - Nota: desde cualquier página se puede llegar a la página de error 404 o error 500
-![image](https://github.com/user-attachments/assets/aa633236-b0dc-4547-8863-0768930d7a48)
+![image](https://github.com/user-attachments/assets/736d6cc7-bdc9-4202-aa2c-819747b63d02)
+
 
 ## Diagrama con las entidades de la base de datos
 ![image](https://github.com/user-attachments/assets/d629588d-1e9f-4cad-ade0-2abfac4d74f3)
 
 ## Diagrama de clases y templates
 
+![image](https://github.com/user-attachments/assets/16c888e3-ae9e-4219-84f8-967859ebb0ef)
 
 
