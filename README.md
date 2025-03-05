@@ -12,7 +12,8 @@ Las principales entidades de la aplicación son:
 - **Nutrición**: Planes alimenticios personalizados según los objetivos del usuario.
 - **Entrenamiento**: Rutinas de ejercicios personalizadas.
 - **Comida**: Comidas que tienen las nutriciones (dietas)
-![image](https://github.com/user-attachments/assets/adbb72fd-ade0-4997-8bf7-ec902c2f8e18)
+![image](https://github.com/user-attachments/assets/ebb39070-2ee8-44f3-8278-6b10c66448fd)
+
 
 
 ## 🔑 Permisos de los usuarios
@@ -86,6 +87,8 @@ Las principales entidades de la aplicación son:
 
 ## Diagrama de clases y templates
 
-![image](https://github.com/user-attachments/assets/16c888e3-ae9e-4219-84f8-967859ebb0ef)
+![image](https://github.com/user-attachments/assets/5fd266c5-22e6-4dbc-aab8-048e6e1a14e9)
+
+
 
 
