@@ -90,50 +90,50 @@ public class NutritionService {
         return null;
     }
 
-    public Nutrition updateNutrition(Long nutritionId, Nutrition nutrition, GymUser user){
-        Optional<Nutrition> opNutrition = nutritionRepository.findById(nutritionId);
-        if(opNutrition.isPresent()){
-            deleteDependencies(opNutrition.get());
-            Nutrition existingNutrition = opNutrition.get();
-            existingNutrition.setId(nutritionId);
+    public Nutrition updateNutrition(Long nutritionId, Nutrition nutrition, GymUser user) {
+        Optional<Nutrition> theNutrition = nutritionRepository.findById(nutritionId);
+
+        if (theNutrition.isPresent()) {
+            Nutrition existingNutrition = theNutrition.get();
+
             existingNutrition.setGymUser(user);
             existingNutrition.setName(nutrition.getName());
             existingNutrition.setType(nutrition.getType());
-            List<Food> newFoodList = new ArrayList<>();
-            for (Food food : nutrition.getListFoods()) {
-                Optional<Food> possibleFood = foodRepository.findByName(food.getName());
-                if (possibleFood.isPresent()) {
-                    newFoodList.add(possibleFood.get());
-                } else {
-                    return null;
+
+            // keep the previews foods list
+            List<Food> existingFoods = existingNutrition.getListFoods();
+
+            for (Food food : existingFoods) {
+                if (foodService.getFood(food.getName()) == null) {
+                    return null;  // If any food doesn`t exit, we cancel the operation
                 }
             }
-            existingNutrition.setListFoods(newFoodList);
 
-            nutritionRepository.save(existingNutrition);
-
-            for (Food food : newFoodList) {
-                food.getListNutritions().add(existingNutrition);
-                foodRepository.save(food);
+            // Agregar solo nuevas foods sin duplicar
+            for (Food food : existingFoods) {
+                Food f = foodService.getFood(food.getName());
+                if (!existingNutrition.getListFoods().contains(f)) {
+                    addFood(existingNutrition, f);
+                }
             }
 
+            nutritionRepository.save(existingNutrition);
             return existingNutrition;
         }
+
         return null;
     }
 
-    private void deleteDependencies(Nutrition nutrition){
-        if(nutrition != null){
-            List<Food> listFood = new ArrayList<>(nutrition.getListFoods());
-            if(listFood != null){
-                for(Food food: listFood){
-                    deleteListFood(nutrition, food);
-                }
-                nutrition.getListFoods().clear();
+
+    private void resetListFood(Nutrition nutrition){
+        if(nutrition.getListFoods() != null){
+            List<Food> list = new ArrayList<>(nutrition.getListFoods());
+            for (Food food : list) {
+                deleteListFood(nutrition, food);
             }
+            nutrition.getListFoods().clear();
         }
     }
-
     public Nutrition deleteNutrition(Long id) {
 
         Optional<Nutrition> theNutrition = nutritionRepository.findById(id);
@@ -157,12 +157,19 @@ public class NutritionService {
         return null;
     }
 
-    public void addFood (Nutrition nutrition, Food food){
-        nutrition.getListFoods().add(food);
-        food.getListNutritions().add(nutrition);
+    public void addFood(Nutrition nutrition, Food food) {
+        if (!nutrition.getListFoods().contains(food)) {
+            nutrition.getListFoods().add(food);
+        }
+
+        if (!food.getListNutritions().contains(nutrition)) {
+            food.getListNutritions().add(nutrition);
+        }
+
         nutritionRepository.save(nutrition);
         foodRepository.save(food);
     }
+
     public void deleteListFood (Nutrition nutrition, Food food){
 
         nutrition.getListFoods().remove(food);

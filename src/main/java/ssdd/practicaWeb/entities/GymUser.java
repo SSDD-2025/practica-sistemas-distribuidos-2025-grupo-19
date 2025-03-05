@@ -34,9 +34,8 @@ public class GymUser {
 
     //Constructor, getters, setters
     //Other details are not compulsory but editable
-    public GymUser(Long id, String username, String password) {
+    public GymUser(String username, String password) {
         this.userImage = "/images/emptyUser.png";
-        this.id = id;
         this.username = username;
         this.password = password;
     }

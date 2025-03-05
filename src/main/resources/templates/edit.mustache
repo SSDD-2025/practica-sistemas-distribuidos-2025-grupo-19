@@ -110,8 +110,9 @@
     <br>
     <label for="gender" class="title">Género</label><br>
     <select name="gender"  class="select" id="gender">
-        <option>Masculino</option>
-        <option>Femenino</option>
+        {{#genders}}
+            <option value="{{gender}}" {{#selected}}selected{{/selected}}>{{#gender}}{{.}}{{/gender}}</option>
+        {{/genders}}
     </select>
     <br><br>
     <label for="height" class="title">Altura</label><br>
@@ -172,16 +173,16 @@
     <br><br>
     <label for="morphology" class="title">Morfología</label><br>
     <select name="morphology" class="select" id="morphology">
-        <option>Ectomorfo</option> <!-- Al pasar el cursor añadir explicacion-->
-        <option>Endomorfo</option>
-        <option>Mesomorfo</option>
+        {{#morphologys}}
+            <option value="{{morphology}}" {{#selected}}selected{{/selected}}>{{#morphology}}{{.}}{{/morphology}}</option>
+        {{/morphologys}}
     </select>
     <br><br>
     <label for="caloricPhase" class="title">Etapa calórica</label><br>
     <select name="caloricPhase" class="select" id="caloricPhase">
-        <option>Definicion</option><!-- Añadir también explicación-->
-        <option>Mantenimiento</option>
-        <option>Volumen</option>
+        {{#caloricPhases}}
+            <option value="{{caloricPhase}}" {{#selected}}selected{{/selected}}>{{#caloricPhase}}{{.}}{{/caloricPhase}}</option>
+        {{/caloricPhases}}
     </select>
     <br><br>
     <span class="lowerButtonsContainer">

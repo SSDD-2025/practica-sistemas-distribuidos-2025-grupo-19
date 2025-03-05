@@ -7,11 +7,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ssdd.practicaWeb.dtosEdit.Goal;
+import ssdd.practicaWeb.dtosEdit.Intensity;
 import ssdd.practicaWeb.entities.Routine;
 import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.repositories.RoutineRepository;
 import ssdd.practicaWeb.service.RoutineService;
 import ssdd.practicaWeb.service.UserService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class RoutineController {
@@ -78,6 +83,24 @@ public class RoutineController {
         if(routine == null){
             return "redirect:/frontPage?userId=" + user.getId();
         }
+
+        String originalIntensity = routine.getIntensity();
+        String originalGoal = routine.getGoal();
+
+        List<Intensity> intensities = new ArrayList<>();
+        intensities.add(new Intensity("Baja", "Baja".equals(originalIntensity)));
+        intensities.add(new Intensity("Moderada", "Moderada".equals(originalIntensity)));
+        intensities.add(new Intensity("Alta", "Alta".equals(originalIntensity)));
+
+
+        List <Goal> goals = new ArrayList<>();
+        goals.add(new Goal("Bajar de peso", "Bajar de peso".equals(originalGoal)));
+        goals.add(new Goal("Mantenerse", "Mantenerse".equals(originalGoal)));
+        goals.add(new Goal("Subir de peso", "Subir de peso".equals(originalGoal)));
+
+        model.addAttribute("intensities", intensities);
+        model.addAttribute("goals", goals);
+
         model.addAttribute("routine",routine);
         model.addAttribute("userId",userId);
         return "editRoutine";

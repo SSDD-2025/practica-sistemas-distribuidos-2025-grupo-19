@@ -1,5 +1,6 @@
 package ssdd.practicaWeb.service;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ssdd.practicaWeb.entities.Food;
@@ -13,9 +14,20 @@ public class FoodService {
     @Autowired
     FoodRepository foodRepository;
 
+
+
     public Food createFood(Food food){
         foodRepository.save(food);
         return food;
+    }
+    public Food getFood(String name){
+        Optional<Food> theFood = foodRepository.findByName(name);
+        if (theFood.isPresent()) {
+            Food food = theFood.get();
+            return food;
+        } else {
+            return null;
+        }
     }
     public Food getFood(Long id){
         Optional<Food> theFood = foodRepository.findById(id);

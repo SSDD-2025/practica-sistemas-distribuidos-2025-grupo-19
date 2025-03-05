@@ -54,14 +54,14 @@
 <br><br>
 <label for="intensity" class="title">Intensidad</label><br>
 <select name="intensity"  class="select" id="intensity">
-    <option>Baja</option>
-    <option>Moderada</option>
-    <option>Alta</option>
+    {{#intensities}}
+        <option value="{{intensity}}" {{#selected}}selected{{/selected}}> {{#intensity}}{{.}}{{/intensity}}</option>
+    {{/intensities}}
 </select>
 <br><br>
 <label for="duration" class="title">Duracion de la rutina</label><br>
 <input id="duration" name="duration" type="number" inputmode="numeric" class="numeric"
-       min="1" max="200" value={{routine.duration}} placeholder={{routine.duration}}>
+       min="1" max="200" value={{routine.duration}} >
 <br><br>
 <label for="exercises" class="title">Ejercicios de la rutina</label><br>
 <textarea name="exercises" class="textarea" id="exercises" rows="10" cols="70" placeholder="{{routine.exercises}}">
@@ -70,9 +70,9 @@
 <br><br>
 <label for="goal" class="title">Objetivo</label><br>
 <select name="goal"  class="select" id="goal">
-    <option>Bajar de peso</option>
-    <option>Mantenerse</option>
-    <option>Subir de peso</option>
+    {{#goals}}
+        <option value="{{goal}}" {{#selected}}selected{{/selected}}>{{#goal}}{{.}}{{/goal}}</option>
+    {{/goals}}
 </select>
 <br><br>
 <span class="lowerButtonsContainer">

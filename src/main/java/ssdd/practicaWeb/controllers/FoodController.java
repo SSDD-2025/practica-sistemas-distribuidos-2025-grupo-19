@@ -24,41 +24,6 @@ public class FoodController {
     @Autowired
     private UserService userService;
 
-    @PostConstruct
-    public void foodConstructor(){
-        Food fresa = new Food("fresa","fruta",33);
-        Food nueces = new Food("nueces","fruto seco",654);
-        Food huevo = new Food("huevo","alimento proteico",155);
-        Food lubina = new Food("lubina","pescado",98);
-        Food yogurFresa = new Food("yogur fresa","lacteo",59);
-        Food leche = new Food("leche","bebida",42);
-        Food queso = new Food("queso","lacteo",402);
-        Food naranja = new Food("naranja","fruta",47);
-        Food pizza = new Food("pizza","pizza",266);
-        Food limon = new Food("limon","citrico",29);
-        Food  coliflor= new Food("coliflor","verdura",25);
-        Food  aquarius= new Food("aquarius","bebida",45);
-        Food  lechuga= new Food("lechuga","verdura",15);
-        Food  yogurLimon= new Food("yogur limon","lacteo",103);
-        Food  costillar= new Food("ribs","carne",395);
-
-        foodService.createFood(fresa);
-        foodService.createFood(nueces);
-        foodService.createFood(huevo);
-        foodService.createFood(lubina);
-        foodService.createFood(yogurFresa);
-        foodService.createFood(leche);
-        foodService.createFood(queso);
-        foodService.createFood(naranja);
-        foodService.createFood(pizza);
-        foodService.createFood(limon);
-        foodService.createFood(coliflor);
-        foodService.createFood(aquarius);
-        foodService.createFood(lechuga);
-        foodService.createFood(yogurLimon);
-        foodService.createFood(costillar);
-    }
-
     @GetMapping("/ListFoods/CreateFood")
     public String InterfaceCreateFood(@RequestParam ("nutritionId") Long nutritionId, Model model) {
         model.addAttribute("food",new Food());
