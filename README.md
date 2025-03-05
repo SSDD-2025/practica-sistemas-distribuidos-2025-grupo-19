@@ -14,13 +14,6 @@ Las principales entidades de la aplicación son:
 - **Comida**: Comidas que tienen las nutriciones (dietas)
 ![image](https://github.com/user-attachments/assets/ebb39070-2ee8-44f3-8278-6b10c66448fd)
 
-
-
-## 🔑 Permisos de los usuarios
-- **Anónimo**: Puede ver los diferentes entreamientos y rutinas disponibles pero sin poder editarlos o eliminarlos, puede registrarse
-- **Registrado**: Puede acceder a sus planes de entrenamiento, puede acceder a sus planes de dietas, puede editar y eliminar los planes de ambos ambitos que hayan sido creado por ellos.
-- **Admin**: Tiene todos los permisos de un usuario registrado y permisos para crear planes de entrenamiento y de dietas, así como editarlos o eliminarlos.
-
 ## 🖼️ Imágenes
 - **Usuario**: Los usuarios podrán tener foto de perfil.
 
@@ -88,6 +81,15 @@ Las principales entidades de la aplicación son:
 ## Diagrama de clases y templates
 
 ![image](https://github.com/user-attachments/assets/5fd266c5-22e6-4dbc-aab8-048e6e1a14e9)
+
+## Instrucciones para ejecución
+Descargar Intellij en jetBrains: https://www.jetbrains.com/es-es/idea/download/?section=windows
+En file->settings->pluggins descargar las siguientes extensiones
+![image](https://github.com/user-attachments/assets/068c12fc-23b5-46e4-97c0-ac50facf5aa5)
+Presionar con click derecho el pom.xml y darle a "Add as a maven project". El proyecto ya estara listo para ejecutarse, sin embargo hay que lanzar primero la base de datos en MySqlWorkbech (descargar en https://dev.mysql.com/downloads/workbench/), es esta se lanzara en el puerto 3036 en localhost con el nombre gymbrosdb (creando un nuevo schema con dicho nombre). y tras ejecutarse el programa ya se podra observar la base de datos MySql.
+
+
+
 
 
 
