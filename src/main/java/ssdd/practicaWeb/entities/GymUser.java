@@ -1,7 +1,11 @@
 package ssdd.practicaWeb.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,17 +17,44 @@ public class GymUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 1500000)
-    private String userImage;
+
+    @Lob
+    private Blob imgUser;
+
+    @NotNull(message = "El nombre no puede estar vacío")
+    @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres")
     @Column(unique = true)
     private String username;
+
+    @NotBlank(message = "La contraseña no puede estar vacía")
+    @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres")
     private String password;
+
+    @NotNull(message = "El peso es obligatorio")
+    @Min(value = 1, message = "El peso debe ser mayor que 0 kg")
     private double weight;//Kg
+
+    @NotNull(message = "El peso objetivo es obligatorio")
+    @Min(value = 1, message = "El peso objetivo debe ser mayor que 0 kg")
     private double goalWeight;//kg
+
+    @NotNull(message = "La altura es obligatoria")
+    @Min(value = 1, message = "La altura debe ser mayor que 0 cm")
+    @Max(value = 300, message = "La altura no puede ser mayor de 300 cm")
     private int height;//cm
+
+    @NotBlank(message = "El género es obligatorio")
     private String gender;
+
+    @NotNull(message = "La edad es obligatoria")
+    @Min(value = 1, message = "La edad debe ser mayor que 0 años")
+    @Max(value = 150, message = "La edad no puede ser mayor de 150 años")
     private int age;
+
+    @NotBlank(message = "La morfología es obligatoria")
     private String morphology;
+
+    @NotBlank(message = "La etapa calórica es obligatoria")
     private String caloricPhase;
 
     @OneToMany(mappedBy = "gymUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -35,14 +66,11 @@ public class GymUser {
     //Constructor, getters, setters
     //Other details are not compulsory but editable
     public GymUser(String username, String password) {
-        this.userImage = "/images/emptyUser.png";
         this.username = username;
         this.password = password;
     }
 
-    public GymUser() {
-        this.userImage = "/images/emptyUser.png";
-    }
+    public GymUser() {}
 
     public List<Nutrition> getListNutrition() {
         return listNutrition;
@@ -140,11 +168,7 @@ public class GymUser {
         this.caloricPhase = caloricPhase;
     }
 
-    public String getUserImage() {
-        return userImage;
-    }
+    public Blob getImgUser() {return imgUser;}
 
-    public void setUserImage(String userImage) {
-        this.userImage = userImage;
-    }
+    public void setImgUser(Blob imgUser) {this.imgUser = imgUser;}
 }

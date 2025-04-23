@@ -2,15 +2,22 @@ package ssdd.practicaWeb.service;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import ssdd.practicaWeb.entities.Food;
 import ssdd.practicaWeb.entities.GymUser;
 import ssdd.practicaWeb.entities.Nutrition;
 import ssdd.practicaWeb.entities.Routine;
+import ssdd.practicaWeb.repositories.FoodRepository;
+import ssdd.practicaWeb.repositories.NutritionRepository;
 import ssdd.practicaWeb.repositories.RoutineRepository;
 import ssdd.practicaWeb.repositories.UserRepository;
 
+import javax.sql.rowset.serial.SerialBlob;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,16 +26,27 @@ public class DataBaseInit {
 
     @Autowired
     UserRepository userRepository;
+
     @Autowired
     UserService userService;
+
     @Autowired
     NutritionService nutritionService;
+
     @Autowired
     FoodService foodService;
+
     @Autowired
     RoutineRepository routineRepository;
+
+    @Autowired
+    NutritionRepository nutritionRepository;
+
+    @Autowired
+    FoodRepository foodRepository;
+
     @PostConstruct
-    public void init() throws IOException{
+    public void init() throws IOException, SQLException {
         Food fresa = new Food("fresa","fruta",33);
         Food nueces = new Food("nueces","fruto seco",654);
         Food huevo = new Food("huevo","alimento proteico",155);
@@ -69,6 +87,14 @@ public class DataBaseInit {
         gymUser.setGoalWeight(85);
         gymUser.setMorphology("Mesomorfo");
         gymUser.setCaloricPhase("Volumen");
+
+        ClassPathResource imgFile0 = new ClassPathResource("static/images/emptyUser.png");
+        byte[] imageBytes0;
+        try (InputStream inputStream = imgFile0.getInputStream()) {
+            imageBytes0 = inputStream.readAllBytes();
+        }
+        Blob imageBlob0 = new SerialBlob(imageBytes0);
+        gymUser.setImgUser(imageBlob0);
         userRepository.save(gymUser);
 
         Routine routine1 = new Routine("Pecho","Alta",90,"Press de banca : 4x8-10\n" +
@@ -113,14 +139,39 @@ public class DataBaseInit {
         foods2.add(queso);
         List<Nutrition> listNutritionsFood2 = new ArrayList<>();
 
-        Nutrition nutrition1 = new Nutrition("Deficit","Deficit Calorico",foods1);
-        Nutrition nutrition2 = new Nutrition("Superavit","Superavit Calorico",foods2);
-        listNutritionsFood1.add(nutrition1);
-        listNutritionsFood2.add(nutrition2);
 
-        fresa.setListNutritions( listNutritionsFood1);
+        Nutrition nutrition1 = new Nutrition();
+        nutrition1.setName("Deficit");
+        nutrition1.setType("Deficit Calorico");
         nutrition1.setGymUser(gymUser);
+        nutritionRepository.save(nutrition1);
+
+
+        Nutrition nutrition2 = new Nutrition();
+        nutrition2.setName("Superavit");
+        nutrition2.setType("Deficit Calorico");
         nutrition2.setGymUser(gymUser);
+        nutritionRepository.save(nutrition2);
+
+        nutrition1.setListFoods(foods1);
+        nutrition2.setListFoods(foods2);
+
+        fresa.setListNutritions(List.of(nutrition1));
+        foodRepository.save(fresa);
+        nueces.setListNutritions(List.of(nutrition1));
+        foodRepository.save(nueces);
+        huevo.setListNutritions(List.of(nutrition1));
+        foodRepository.save(huevo);
+
+        lechuga.setListNutritions(List.of(nutrition2));
+        foodRepository.save(lechuga);
+        lubina.setListNutritions(List.of(nutrition2));
+        foodRepository.save(lubina);
+        limon.setListNutritions(List.of(nutrition2));
+        foodRepository.save(limon);
+
+        nutritionRepository.save(nutrition1);
+        nutritionRepository.save(nutrition2);
 
         List<Nutrition> listNutrition = new ArrayList<>();
         listNutrition.add(nutrition1);

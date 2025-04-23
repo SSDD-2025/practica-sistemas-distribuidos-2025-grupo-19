@@ -12,6 +12,8 @@ import ssdd.practicaWeb.service.NutritionService;
 import ssdd.practicaWeb.service.RoutineService;
 import ssdd.practicaWeb.service.UserService;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -37,7 +39,7 @@ public class UserRESTController {
         return ResponseEntity.ok(list);
     }
     @PostMapping
-    public ResponseEntity<GymUserDTO> createUser(@RequestBody GymUser user){
+    public ResponseEntity<GymUserDTO> createUser(@RequestBody GymUser user) throws SQLException, IOException {
         GymUser userObt = userService.createGymUser(user);
         return ResponseEntity.status(201).body(new GymUserDTO(userObt));
     }
@@ -72,9 +74,7 @@ public class UserRESTController {
         if(user == null){
             return ResponseEntity.notFound().build();
         }
-        if(parcialUser.getUserImage() != null){
-            user.setUserImage(parcialUser.getUserImage());
-        }
+
         if(parcialUser.getUsername() != null){
             user.setUsername(parcialUser.getUsername());
         }

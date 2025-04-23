@@ -1,8 +1,10 @@
 package ssdd.practicaWeb.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,7 +57,12 @@ public class NutritionController {
         return "redirect:/FrontPage";
     }
     @PostMapping("/ListNutrition/CreateNutrition")
-    public String addNutrition(Nutrition nutrition, @RequestParam("userId") Long userId){
+    public String addNutrition(@Valid Nutrition nutrition, BindingResult result, Model model, @RequestParam("userId") Long userId){
+        if (result.hasErrors()) {
+            model.addAttribute( "mistake", "Por favor, corrige los errores en el formulario.");
+            model.addAttribute("userId",userId);
+            return "createNutrition";
+        }
         GymUser user = userService.getGymUser(userId);
         if (user != null){
             nutrition.setGymUser(user);
@@ -91,7 +98,15 @@ public class NutritionController {
     }
 
     @PostMapping("/ListNutrition/ModifyNutrition/{nutritionId}")
-    public String editNutrition(Nutrition nutrition,@PathVariable Long nutritionId,@RequestParam("userId") Long userId) {
+    public String editNutrition(@Valid Nutrition nutrition, BindingResult result, Model model,@PathVariable Long nutritionId,@RequestParam("userId") Long userId) {
+        if (result.hasErrors()) {
+            Nutrition nutrition1 = nutritionService.getNutrition(nutritionId);
+            model.addAttribute("nutrition", nutrition1);
+            model.addAttribute( "mistake", "Por favor, corrige los errores en el formulario.");
+            model.addAttribute("userId",userId);
+            return "modifyNutrition";
+
+        }
         GymUser user = userService.getGymUser(userId);
         nutrition.setGymUser(user);
         nutritionService.updateNutrition(nutritionId, nutrition, user);

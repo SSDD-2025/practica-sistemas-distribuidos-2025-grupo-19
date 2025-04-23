@@ -38,6 +38,13 @@
             return true;
         }
     </script>
+    {{#mistake}}
+        <script>
+            window.onload = function() {
+                alert("{{mistake}}");
+            }
+        </script>
+    {{/mistake}}
 </head>
 <body>
 <div class="goBackButtonContainer">
@@ -46,7 +53,7 @@
     </button>
 </div>
 <br><br>
-<form name="createForm" action="/routines/createRoutine?userId={{userId}}" method="post" onsubmit="return validateForm()">
+<form name="createForm" action="/routines/createRoutine?userId={{userId}}" method="post" >
     <input type="hidden" name="userId" value="{{userId}}">
     <label for="name" class="title">Nombre de la rutina</label><br>
     <input id="name" class="field" name="routineName" type="text" minlength="1" maxlength="15"

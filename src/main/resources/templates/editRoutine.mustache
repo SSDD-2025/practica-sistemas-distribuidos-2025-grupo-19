@@ -39,6 +39,13 @@
             return true;
         }
     </script>
+    {{#mistake}}
+        <script>
+            window.onload = function() {
+                alert("{{mistake}}");
+            }
+        </script>
+    {{/mistake}}
 </head>
 <body>
 <div class="goBackButtonContainer">
@@ -47,7 +54,7 @@
     </button>
 </div>
 <br>
-<form name="editForm" method="post" onsubmit="return validateForm()" action="/routines/editRoutine/{{routine.id}}?userId={{userId}}">
+<form name="editForm" method="post"  action="/routines/editRoutine/{{routine.id}}?userId={{userId}}">
 <label for="routineName" class="title">Nombre de la rutina</label><br>
 <input id="routineName" name="routineName" type="text" class="field" value="{{routine.routineName}}"
        placeholder={{routine.routineName}}>

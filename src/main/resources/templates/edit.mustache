@@ -64,131 +64,134 @@
             }
             return true;
         }
-        function editImage(){
-            let userImage = document.getElementById("uImage");
-            let input = document.getElementById("editImageInput");
-            if(input.files && input.files[0]){
-                let reader = new FileReader();
-                reader.onload = function(e){
-                    userImage.src = e.target.result;
-                    document.getElementById("userImage").value = e.target.result;
+
+        function previewSelectedImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById("previewImage").src = e.target.result;
                 };
-                reader.readAsDataURL(input.files[0]);
-            }else{
-                document.getElementById("userImage").value = "{{user.userImage}}";
+                reader.readAsDataURL(file);
             }
         }
+
     </script>
+    {{#mistake}}
+        <script>
+            window.onload = function() {
+                alert("{{mistake}}");
+            }
+        </script>
+    {{/mistake}}
 </head>
 <body>
-<div class="goBackButtonContainer">
-    <button type="button" class="goBackButton" onclick="goBackwards()">
-        <img src="/images/goBack.jpg" alt="arrowPreviousPage">
-    </button>
-</div>
-<div class="userImage">
-    <img src="{{user.userImage}}" id="uImage" alt="User photo">
-</div>
-<div class="editImageInputContainer">
-    <label for="editImageInput" class="editImageButton">
-        <input type="file" id="editImageInput" accept="image/*" class="editImageInput" onchange="editImage()">
-        <span class="editImageButtonText">Editar imagen</span>
-    </label>
-</div>
-<br>
-<form action="/users/edit/{{user.id}}" method="post" onsubmit="return validateForm()" accept-charset="UTF-8">
-    <input type="hidden" name="userImage" id="userImage" value="{{user.userImage}}">
-    <label for="username" class="title">Nombre de usuario</label><br>
-    <input id="username" name="username" type="text" class="field" value={{user.username}}
-           placeholder={{user.username}} minlength="6" maxlength="10">
-    <br><br>
-    <label for="password" class="title">Contraseña</label><br>
-    <span class="passwordContainer">
-                <input name="password" id="password" type="password" class="field" minlength="6" maxlength="10" value={{user.password}}>
-                <img class="eyeImage" src="/images/openedEye.png" id="Eye" onclick="visualizeEye()" alt="Visualize password"><!-- foto ojo y funcion-->
-            </span>
+    <div class="goBackButtonContainer">
+        <button type="button" class="goBackButton" onclick="goBackwards()">
+            <img src="/images/goBack.jpg" alt="arrowPreviousPage">
+        </button>
+    </div>
+
     <br>
-    <label for="gender" class="title">Género</label><br>
-    <select name="gender"  class="select" id="gender">
-        {{#genders}}
-            <option value="{{gender}}" {{#selected}}selected{{/selected}}>{{#gender}}{{.}}{{/gender}}</option>
-        {{/genders}}
-    </select>
-    <br><br>
-    <label for="height" class="title">Altura</label><br>
-    <input id="height" name="height" type="number" inputmode="numeric" step="1"
-           min="50" max="280" class="numeric" placeholder=
-        {{#user.height}}
-            {{user.height}}
-        {{/user.height}}
-        {{^user.height}}
-        cm
-        {{/user.height}}
-           value=
-        {{#user.height}}
-            {{user.height}}
-        {{/user.height}}>
-    <br><br>
-    <label for="age" class="title">Edad</label><br>
-    <input id="age" name="age" type="number" inputmode="numeric" step="1"
-           min="3" max="130" class="numeric" placeholder=
-        {{#user.age}}
-            {{user.age}}
-        {{/user.age}}
-        {{^user.age}}
-        Edad
-        {{/user.age}}
-           value=
-        {{#user.age}}
-            {{user.age}}
-        {{/user.age}}>
-    <br><br>
-    <label for="weight" class="title">Peso</label><br>
-    <input id="weight" name="weight" type="number" inputmode="numeric" step="1"
-           min="15" max="300" class="numeric" placeholder=
-        {{#user.weight}}
-            {{user.weight}}
-        {{/user.weight}}
-        {{^user.weight}}
-        Kg
-        {{/user.weight}}
-           value=
-        {{#user.weight}}
-            {{user.weight}}
-        {{/user.weight}}>
-    <br><br>
-    <label for="goalWeight" class="title">Peso objetivo</label><br>
-    <input id="goalWeight" name="goalWeight" type="number" inputmode="numeric" step="1"
-           min="15" max="300" class="numeric" placeholder=
-        {{#user.goalWeight}}
-            {{user.goalWeight}}
-        {{/user.goalWeight}}
-        {{^user.goalWeight}}
-        Kg
-        {{/user.goalWeight}}
-           value=
-        {{#user.goalWeight}}
-            {{user.goalWeight}}
-        {{/user.goalWeight}}>
-    <br><br>
-    <label for="morphology" class="title">Morfología</label><br>
-    <select name="morphology" class="select" id="morphology">
-        {{#morphologys}}
-            <option value="{{morphology}}" {{#selected}}selected{{/selected}}>{{#morphology}}{{.}}{{/morphology}}</option>
-        {{/morphologys}}
-    </select>
-    <br><br>
-    <label for="caloricPhase" class="title">Etapa calórica</label><br>
-    <select name="caloricPhase" class="select" id="caloricPhase">
-        {{#caloricPhases}}
-            <option value="{{caloricPhase}}" {{#selected}}selected{{/selected}}>{{#caloricPhase}}{{.}}{{/caloricPhase}}</option>
-        {{/caloricPhases}}
-    </select>
-    <br><br>
-    <span class="lowerButtonsContainer">
-                <button class="cancelButton" type="button" onclick="goBackwards()">Cancelar</button>
-                <button class="saveButton" type="submit">Guardar</button>
-            </span>
-</form>
+    <form action="/users/edit/{{user.id}}" method="post"  accept-charset="UTF-8" enctype="multipart/form-data">>
+
+        <div class="mb-3 text-center">
+            <img src="/users/image/{{user.id}}"  id="previewImage" alt="User photo" class="card-img-top" style="max-width: 300px; border-radius: 10px;">
+        </div>
+
+        <input type="file" name="imageFile" placeholder="Foto" accept=".jpg, .jpeg, .png" onchange="previewSelectedImage(event)">
+
+        <label for="username" class="title">Nombre de usuario</label><br>
+        <input id="username" name="username" type="text" class="field" value={{user.username}}
+               placeholder={{user.username}} minlength="6" maxlength="10">
+        <br><br>
+        <label for="password" class="title">Contraseña</label><br>
+        <span class="passwordContainer">
+                    <input name="password" id="password" type="password" class="field" minlength="6" maxlength="10" value={{user.password}}>
+                    <img class="eyeImage" src="/images/openedEye.png" id="Eye" onclick="visualizeEye()" alt="Visualize password">
+                </span>
+        <br>
+        <label for="gender" class="title">Género</label><br>
+        <select name="gender"  class="select" id="gender">
+            {{#genders}}
+                <option value="{{gender}}" {{#selected}}selected{{/selected}}>{{#gender}}{{.}}{{/gender}}</option>
+            {{/genders}}
+        </select>
+        <br><br>
+        <label for="height" class="title">Altura</label><br>
+        <input id="height" name="height" type="number" inputmode="numeric" step="1"
+               min="50" max="280" class="numeric" placeholder=
+            {{#user.height}}
+                {{user.height}}
+            {{/user.height}}
+            {{^user.height}}
+            cm
+            {{/user.height}}
+               value=
+            {{#user.height}}
+                {{user.height}}
+            {{/user.height}}>
+        <br><br>
+        <label for="age" class="title">Edad</label><br>
+        <input id="age" name="age" type="number" inputmode="numeric" step="1"
+               min="3" max="130" class="numeric" placeholder=
+            {{#user.age}}
+                {{user.age}}
+            {{/user.age}}
+            {{^user.age}}
+            Edad
+            {{/user.age}}
+               value=
+            {{#user.age}}
+                {{user.age}}
+            {{/user.age}}>
+        <br><br>
+        <label for="weight" class="title">Peso</label><br>
+        <input id="weight" name="weight" type="number" inputmode="numeric" step="1"
+               min="15" max="300" class="numeric" placeholder=
+            {{#user.weight}}
+                {{user.weight}}
+            {{/user.weight}}
+            {{^user.weight}}
+            Kg
+            {{/user.weight}}
+               value=
+            {{#user.weight}}
+                {{user.weight}}
+            {{/user.weight}}>
+        <br><br>
+        <label for="goalWeight" class="title">Peso objetivo</label><br>
+        <input id="goalWeight" name="goalWeight" type="number" inputmode="numeric" step="1"
+               min="15" max="300" class="numeric" placeholder=
+            {{#user.goalWeight}}
+                {{user.goalWeight}}
+            {{/user.goalWeight}}
+            {{^user.goalWeight}}
+            Kg
+            {{/user.goalWeight}}
+               value=
+            {{#user.goalWeight}}
+                {{user.goalWeight}}
+            {{/user.goalWeight}}>
+        <br><br>
+        <label for="morphology" class="title">Morfología</label><br>
+        <select name="morphology" class="select" id="morphology">
+            {{#morphologys}}
+                <option value="{{morphology}}" {{#selected}}selected{{/selected}}>{{#morphology}}{{.}}{{/morphology}}</option>
+            {{/morphologys}}
+        </select>
+        <br><br>
+        <label for="caloricPhase" class="title">Etapa calórica</label><br>
+        <select name="caloricPhase" class="select" id="caloricPhase">
+            {{#caloricPhases}}
+                <option value="{{caloricPhase}}" {{#selected}}selected{{/selected}}>{{#caloricPhase}}{{.}}{{/caloricPhase}}</option>
+            {{/caloricPhases}}
+        </select>
+        <br><br>
+        <span class="lowerButtonsContainer">
+                    <button class="cancelButton" type="button" onclick="goBackwards()">Cancelar</button>
+                    <button class="saveButton" type="submit">Guardar</button>
+                </span>
+    </form>
 </body>
 </html>

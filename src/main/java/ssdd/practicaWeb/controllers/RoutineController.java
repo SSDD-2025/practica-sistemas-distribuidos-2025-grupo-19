@@ -1,8 +1,10 @@
 package ssdd.practicaWeb.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,7 +65,13 @@ public class RoutineController {
         return "redirect:/Login";
     }
     @PostMapping("/routines/createRoutine")
-    public String createRoutinePost(Routine routine, @RequestParam("userId") Long userId){
+    public String createRoutinePost(@Valid Routine routine, BindingResult result, @RequestParam("userId") Long userId, Model model){
+        if (result.hasErrors()) {
+            model.addAttribute( "mistake", "Por favor, corrige los errores en el formulario.");
+            model.addAttribute("userId",userId);
+            return "createRoutine";
+        }
+
         GymUser user = userService.getGymUser(userId);
         if (user != null){
             routine.setGymUser(user);
@@ -106,7 +114,34 @@ public class RoutineController {
         return "editRoutine";
     }
     @PostMapping("/routines/editRoutine/{routineId}")
-    public String editRoutinePost(Routine routine, @PathVariable Long routineId, @RequestParam("userId") Long userId){
+    public String editRoutinePost(@Valid Routine routine, BindingResult result, @PathVariable Long routineId, @RequestParam("userId") Long userId, Model model){
+
+        if (result.hasErrors()) {
+            Routine routineOriginal = routineService.getRoutine(routineId);
+            String originalIntensity = routineOriginal.getIntensity();
+            String originalGoal = routineOriginal.getGoal();
+
+            List<Intensity> intensities = new ArrayList<>();
+            intensities.add(new Intensity("Baja", "Baja".equals(originalIntensity)));
+            intensities.add(new Intensity("Moderada", "Moderada".equals(originalIntensity)));
+            intensities.add(new Intensity("Alta", "Alta".equals(originalIntensity)));
+
+
+            List <Goal> goals = new ArrayList<>();
+            goals.add(new Goal("Bajar de peso", "Bajar de peso".equals(originalGoal)));
+            goals.add(new Goal("Mantenerse", "Mantenerse".equals(originalGoal)));
+            goals.add(new Goal("Subir de peso", "Subir de peso".equals(originalGoal)));
+
+            model.addAttribute("intensities", intensities);
+            model.addAttribute("goals", goals);
+
+            model.addAttribute("routine",routineOriginal);
+            model.addAttribute("userId",userId);
+
+            model.addAttribute( "mistake", "Por favor, corrige los errores en el formulario.");
+            model.addAttribute("userId", userId);
+            return "editRoutine";
+    }
         GymUser user = userService.getGymUser(userId);
         routineService.updateRoutine(routineId,routine, user);
         return "redirect:/routines?userId=" + userId;

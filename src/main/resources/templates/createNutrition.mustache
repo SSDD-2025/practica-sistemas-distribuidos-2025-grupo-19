@@ -14,6 +14,13 @@
             return true;
         }
     </script>
+    {{#mistake}}
+        <script>
+            window.onload = function() {
+                alert("{{mistake}}");
+            }
+        </script>
+    {{/mistake}}
 </head>
 <body>
 <header>
@@ -31,11 +38,11 @@
         {{#succesfull}}
             <p>Nutricion creada</p>
         {{/succesfull}}
-        <form name="formUpdateNutrition" action="/ListNutrition/CreateNutrition?userId={{userId}}" method="post" onsubmit="return validateForm()">
+        <form name="formUpdateNutrition" action="/ListNutrition/CreateNutrition?userId={{userId}}" method="post" >
         <label for="name">Nombre:</label>
         <input type="text" id="name" name="name" required><br><br>
         <label for="type">Tipo:</label>
-        <input type="text" id="type" name="type" required><br><br>
+        <input type="text" id="type" name="type" ><br><br>
         <input type="submit" value="Agregar Alimentos">
         </form>
     </div>

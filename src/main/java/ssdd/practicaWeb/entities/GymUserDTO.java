@@ -132,7 +132,6 @@ public class GymUserDTO {
     public GymUserDTO(GymUser user) {
         this();
         this.setId(user.getId());
-        this.setUserImage(user.getUserImage());
         this.setUsername(user.getUsername());
         this.setPassword(user.getPassword());
         this.setWeight(user.getWeight());
@@ -161,7 +160,6 @@ public class GymUserDTO {
     public GymUserDTO(GymUser user, List<Nutrition> nutritions, List<Routine> routines) {
         this();
         this.setId(user.getId());
-        this.setUserImage(user.getUserImage());
         this.setUsername(user.getUsername());
         this.setPassword(user.getPassword());
         this.setWeight(user.getWeight());

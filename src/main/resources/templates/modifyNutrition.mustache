@@ -13,6 +13,13 @@
             }
         }
     </script>
+    {{#mistake}}
+        <script>
+            window.onload = function() {
+                alert("{{mistake}}");
+            }
+        </script>
+    {{/mistake}}
 </head>
 <body>
 <header>
@@ -27,12 +34,12 @@
     <div class="blackSpace"></div>
     <div class="changes">
         <h1>Editar Nutricion</h1>
-        <form name="editNutritionForm" method="post" onsubmit="return validateForm()" action="/ListNutrition/ModifyNutrition/{{nutrition.id}}?userId={{userId}}" method="post">
+        <form name="editNutritionForm" method="post"  action="/ListNutrition/ModifyNutrition/{{nutrition.id}}?userId={{userId}}" method="post">
         <input type="hidden" name="id" value="{{nutrition.id}}">
         <label for="name">Nombre:</label>
-        <input type="text" id="name" name="name" value="{{nutrition.name}}" required><br><br>
+        <input type="text" id="name" name="name" value="{{nutrition.name}}" ><br><br>
         <label for="type">Tipo:</label>
-        <input type="text" id="type" name="type" value="{{nutrition.type}}" required><br><br>
+        <input type="text" id="type" name="type" value="{{nutrition.type}}"><br><br>
         <input type="submit" value="Editar">
         </form>
     </div>
