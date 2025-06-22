@@ -4,7 +4,97 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e49554df-54f3-44d2-8de2-6659110b7c49" name="Changes" comment="" />
+    <list default="true" id="e49554df-54f3-44d2-8de2-6659110b7c49" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controller/rest/TrainingRESTController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controller/rest/auth/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controller/web/TrainingController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/dto/FoodMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/dto/NutritionMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/dto/TrainingMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/dto/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/repository/TrainingRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/security/CSRFHandlerConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/security/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/security/RepositoryUserDetailsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/security/WebSecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/security/jwt/AuthResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/security/jwt/JwtRequestFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/security/jwt/JwtTokenProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/security/jwt/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/security/jwt/TokenType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/security/jwt/UnauthorizedHandlerJwt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/security/jwt/UserLoginService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/keystore.jks" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin.mustache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/myTrainings.mustache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/register.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controllers/FoodController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controller/web/FoodController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controllers/FoodRESTController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controller/rest/FoodRESTController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controllers/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controllers/NutritionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controller/web/NutritionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controllers/NutritionRESTController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controller/rest/NutritionRESTController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controllers/RoutineController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controllers/RoutineRESTController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controller/web/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controllers/UserRESTController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/controller/rest/UserRESTController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/entities/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/model/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/entities/FoodDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/dto/FoodDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/entities/GymUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/entities/GymUserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/dto/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/entities/Nutrition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/model/Nutrition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/entities/NutritionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/dto/NutritionDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/entities/Routine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/model/Training.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/entities/RoutineDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/dto/TrainingDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/repositories/FoodRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/repository/FoodRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/repositories/NutritionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/repository/NutritionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/repositories/RoutineRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/repositories/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/service/DataBaseInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/service/DataBaseInit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/service/FoodService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/service/FoodService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/service/NutritionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/service/NutritionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/service/RoutineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/service/TrainingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/styleCreateNutrition.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/styleCreateNutrition.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/styleCreateRoutine.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/styleCreateRoutine.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/styleDetailsNutrition.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/styleDetailsNutrition.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/styleEditRoutine.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/styleEditRoutine.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/styleFrontPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/styleFrontPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/styleLogin.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/styleLogin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/styleModifyNutrition.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/styleModifyNutrition.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/styleNutrition.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/styleNutrition.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/styleRoutines.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/styleRoutines.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/styleShowRoutine.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/styleShowRoutine.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/styleUsers.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/styleUsers.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/createFood.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/createFood.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/createNutrition.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/createNutrition.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/createRoutine.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/createRoutine.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/detailsFood.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/detailsFood.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/detailsNutrition.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/detailsNutrition.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/edit.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/edit.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/editRoutine.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/editRoutine.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/foodSearch.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/foodSearch.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/frontPage.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/listNutrition.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/listNutrition.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/modifyFood.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/editFood.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/modifyNutrition.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/editNutrition.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/preListNutrition.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/preListNutrition.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/routines.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/trainings.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/showRoutine.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/showRoutine.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/users.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/account.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ssdd/practicaWeb/ArandaLeonGerardo1ApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ssdd/practicaWeb/ApplicationTests.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,8 +104,15 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -27,13 +124,17 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Maven.PracticaWeb [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.PracticaWeb [install].executor&quot;: &quot;Run&quot;,
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;Spring Boot.RunApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/vcand/OneDrive - Universidad Rey Juan Carlos/Escritorio/URJC/URJC 23-24/SD/Practica 2 en solitario/practica2_ssdd-main&quot;,
@@ -46,6 +147,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ssdd.practicaWeb.dto" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="RunApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="PracticaWeb" />
@@ -58,7 +164,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-19.0.2-corretto-19.0.2-4caba194b151-48ba4555" />
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26094.121" />
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-IU-251.26094.121" />
       </set>
     </attachedChunks>
   </component>
@@ -96,6 +203,13 @@
       <workItem from="1738844422902" duration="2808000" />
       <workItem from="1739011924235" duration="2414000" />
       <workItem from="1739283493060" duration="383000" />
+      <workItem from="1748533313014" duration="146000" />
+      <workItem from="1748533626248" duration="18050000" />
+      <workItem from="1749208044640" duration="22752000" />
+      <workItem from="1749377377812" duration="1635000" />
+      <workItem from="1749379158237" duration="20183000" />
+      <workItem from="1749568514903" duration="620000" />
+      <workItem from="1750332234730" duration="23330000" />
     </task>
     <servers />
   </component>
@@ -109,12 +223,6 @@
           <properties class="com.samskivert.mustache.MustacheException$Context" package="com.samskivert.mustache" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/src/main/java/ssdd/practicaWeb/entities/Routine.java</url>
-          <line>10</line>
-          <properties field="routineName" class="ssdd.practicaWeb.entities.Routine" />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

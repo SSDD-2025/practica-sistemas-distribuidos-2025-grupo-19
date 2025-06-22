@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/css/styleCreateRoutine.css">
     <script>
         function goBackwards(){
-            window.location.href = "/routines?userId={{userId}}";
+            window.location.href = "/trainings";
         }
         function validateForm(){
             let routineName = document.forms["createForm"]["routineName"].value;
@@ -53,10 +53,10 @@
     </button>
 </div>
 <br><br>
-<form name="createForm" action="/routines/createRoutine?userId={{userId}}" method="post" >
-    <input type="hidden" name="userId" value="{{userId}}">
+<form name="createForm" action="/trainings/createTraining" method="post" >
+<input type="hidden" name="_csrf" value="{{token}}"/>
     <label for="name" class="title">Nombre de la rutina</label><br>
-    <input id="name" class="field" name="routineName" type="text" minlength="1" maxlength="15"
+    <input id="name" class="field" name="name" type="text" minlength="1" maxlength="15"
            placeholder="Inserta el nombre...">
     <br><br>
     <label for="intensity" class="title">Intensidad</label><br>

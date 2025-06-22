@@ -7,35 +7,36 @@
 <body>
 <header>
     <nav>
-        <h2 class="logo"></h2>
+        <a href="/index" style="text-decoration: none;">
+            <h2 class="logo"></h2>
+        </a>
         <ul>
-            <a href="/ListNutrition?userId={{userId}}"><li>LISTA DE NUTRICIONES</li></a>
-            <a href="/ListNutrition/CreateNutrition?userId={{userId}}"><li>CREAR NUTRICION</li></a>
-            <a href="/FrontPage?userId={{userId}}"><li>ATRAS</li></a>
+            {{#logged}}
+                {{^admin}}
+                <a href="/myNutritions"><li>MI LISTA DE DIETAS</li></a>
+                {{/admin}}
+                <a href="/nutritions/createNutrition"><li>CREAR DIETA</li></a>
+            {{/logged}}
+
+            <a href="/index"><li>ATRAS</li></a>
         </ul>
     </nav>
 </header>
-<div class="example">
-    <div class="exercise" style="background: gray;color: white">
-        <p>Ejemplo 1</p>
+
+<div class="listNutrition">
+    <div class="blackSpace"></div>
+    <div class="list">
+        <h2>Lista de todas las dietas</h2>
+        <ul>
+            {{#nutritions}}
+                <li>
+                    <a href="/listNutrition/{{this.id}}">{{this.name}}</a>
+                </li>
+            {{/nutritions}}
+        </ul>
     </div>
-    <div class="exercise" style="background: white;color: #d63031">
-        <p>Ejemplo 2</p>
-    </div>
-    <div class="exercise" style="background: #d63031;color: white">
-        <p>Ejemplo 3</p>
-    </div>
+    <div class="blackSpace"></div>
 </div>
-<div class="titlePhotos">
-    <div class="photos" style="background: linear-gradient(gray,black)">
-        <img src="../images/exampleNutrition1.jpg" alt="example 1" class="photo">
-    </div>
-    <div class="photos" style="background: linear-gradient(white,black)">
-        <img src="../images/exampleNutrition2.jpg" alt="example 2" class="photo">
-    </div>
-    <div class="photos" style="background: linear-gradient(#d63031,black)">
-        <img src="../images/exampleNutrition3.jpg" alt="example 3" class="photo">
-    </div>
-</div>
+
 </body>
 </html>

@@ -17,7 +17,7 @@
             }
         }
         function goBackwards(){
-            window.location.href = "/users/{{user.id}}";
+            window.location.href = "/account";
         }
         function validateForm(){
             let username = document.getElementById("username").value;
@@ -93,24 +93,25 @@
     </div>
 
     <br>
-    <form action="/users/edit/{{user.id}}" method="post"  accept-charset="UTF-8" enctype="multipart/form-data">>
+    <form action="/users/edit" method="post"  accept-charset="UTF-8" enctype="multipart/form-data">>
+        <input type="hidden" name="_csrf" value="{{token}}"/>
 
         <div class="mb-3 text-center">
-            <img src="/users/image/{{user.id}}"  id="previewImage" alt="User photo" class="card-img-top" style="max-width: 300px; border-radius: 10px;">
+            <img src="/account/image"  id="previewImage" alt="User photo" class="card-img-top" style="max-width: 300px; border-radius: 10px;">
         </div>
 
         <input type="file" name="imageFile" placeholder="Foto" accept=".jpg, .jpeg, .png" onchange="previewSelectedImage(event)">
 
         <label for="username" class="title">Nombre de usuario</label><br>
-        <input id="username" name="username" type="text" class="field" value={{user.username}}
-               placeholder={{user.username}} minlength="6" maxlength="10">
+        <input id="username" name="name" type="text" class="field" value={{user.name}}
+               placeholder={{user.name}} minlength="6" maxlength="20">
         <br><br>
-        <label for="password" class="title">Contraseña</label><br>
-        <span class="passwordContainer">
-                    <input name="password" id="password" type="password" class="field" minlength="6" maxlength="10" value={{user.password}}>
-                    <img class="eyeImage" src="/images/openedEye.png" id="Eye" onclick="visualizeEye()" alt="Visualize password">
-                </span>
-        <br>
+<!--        <label for="password" class="title">Contraseña</label><br>-->
+<!--        <span class="passwordContainer">-->
+<!--                    <input name="password" id="password" type="password" class="field" minlength="6" maxlength="10" value={{user.password}}>-->
+<!--                    <img class="eyeImage" src="/images/openedEye.png" id="Eye" onclick="visualizeEye()" alt="Visualize password">-->
+<!--                </span>-->
+<!--        <br>-->
         <label for="gender" class="title">Género</label><br>
         <select name="gender"  class="select" id="gender">
             {{#genders}}

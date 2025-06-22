@@ -40,10 +40,27 @@ nav ul li{
     height: auto;
     margin-top: 200px;
 }
-.atributes{
+.attributes{
     background-color: pink;
     width: 33.3%;
     height: 300px;
     margin-top: 200px;
     text-align: center;
+}
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55px;
+    width: 15%;
+    font-weight: 700;
+    background-color: #d63031;
+}
+.logo::before{
+    content: "GYM";
+    color: black;
+}
+.logo::after{
+    content: "Bros";
+    color: white;
 }

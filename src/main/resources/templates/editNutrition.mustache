@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Nutricion</title>
+    <link rel="stylesheet" href="/css/styleModifyNutrition.css">
+    <script>
+        function validateForm(){
+            let nutritionName = document.forms["editNutritionForm"]["name"].value;
+            console.log(nutritionName)
+            if (nutritionName === "") {
+                alert("Longitud en el nombre de la nutrición no válida (nombre vacío).");
+                return false;
+            }
+        }
+    </script>
+    {{#mistake}}
+        <script>
+            window.onload = function() {
+                alert("{{mistake}}");
+            }
+        </script>
+    {{/mistake}}
+</head>
+<body>
+<header>
+    <nav>
+        <h2 class="logo"></h2>
+        <ul>
+            <a href="/nutritions/detailsNutrition/{{nutrition.id}}"><li>ATRAS</li></a>
+        </ul>
+    </nav>
+</header>
+<div class="modify">
+    <div class="blackSpace"></div>
+    <div class="changes">
+        <h1>Editar Nutricion</h1>
+        <form name="editNutritionForm" method="post"  action="/nutritions/editNutrition/{{nutrition.id}}" method="post">
+            <input type="hidden" name="_csrf" value="{{token}}"/>
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" value="{{nutrition.name}}" ><br><br>
+            <label for="type">Tipo:</label>
+            <input type="text" id="type" name="type" value="{{nutrition.type}}"><br><br>
+            <input type="submit" value="Editar">
+        </form>
+    </div>
+    <div class="blackSpace"></div>
+</div>
+</body>
+</html>

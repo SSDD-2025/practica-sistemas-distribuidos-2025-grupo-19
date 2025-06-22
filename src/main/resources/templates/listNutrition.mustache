@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Listado de nutriciones</title>
+    <title>Mi lista de dietas</title>
     <link rel="stylesheet" href="/css/styleListNutrition.css">
 </head>
 <body>
 <header>
     <nav>
-        <h2 class="logo"></h2>
+        <a href="/index" style="text-decoration: none;">
+            <h2 class="logo"></h2>
+        </a>
         <ul>
-            <a href="/ListNutrition/CreateNutrition?userId={{userId}}"><li>CREAR NUTRICION</li></a>
-            <a href="/Nutrition?userId={{userId}}"><li>ATRAS</li></a>
-            <a href="/FrontPage?userId={{userId}}"><li>PORTADA</li></a>
+            {{#logged}}
+                <a href="/nutritions/createNutrition"><li>CREAR DIETA</li></a>
+            {{/logged}}
+
+            <a href="/nutritions"><li>ATRAS</li></a>
         </ul>
     </nav>
 </header>
 <div class="listNutrition">
     <div class="blackSpace"></div>
     <div class="list">
-        <h2>Lista de nutriciones</h2>
+        <h2>Lista de nutriciones suscritas</h2>
         <ul>
-            {{#nutrition}}
+            {{#nutritions}}
                 <li>
-                    <a href="/ListNutrition/detailsNutrition/{{this.id}}?userId={{userId}}">{{this.name}}</a>
+                    <a href="/nutritions/{{this.id}}">{{this.name}}</a>
                 </li>
-            {{/nutrition}}
+            {{/nutritions}}
         </ul>
     </div>
     <div class="blackSpace"></div>

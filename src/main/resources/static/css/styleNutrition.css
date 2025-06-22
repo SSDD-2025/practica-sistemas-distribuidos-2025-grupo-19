@@ -18,7 +18,7 @@ nav{
     height: 55px;
     width: 15%;
     font-weight: 700;
-    background: #d63031;
+    background-color: #d63031;
 }
 .logo::before{
     content: "GYM";
@@ -80,4 +80,27 @@ ul a:hover{
 .photo{
     height: 300px;
     width: 250px;
+}
+
+.listNutrition{
+    display: flex;
+    justify-content: center;
+}
+.blackSpace{
+    background-color: black;
+    width: 33.3%;
+    height: auto;
+    margin-top: 200px;
+}
+.list{
+    background: linear-gradient(to bottom, #636e72 , lightslategray, #636e72);
+    width: 33.3%;
+    height: auto;
+    margin-top: 200px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    list-style: none;
 }

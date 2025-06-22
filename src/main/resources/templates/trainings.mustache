@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rutinas</title>
+    <link rel="stylesheet" href="/css/styleRoutines.css">
+</head>
+<body>
+<header>
+    <nav>
+        <a href="/index" style="text-decoration: none;">
+            <h2 class="logo"></h2>
+        </a>
+        <ul>
+            {{#logged}}
+                {{^admin}}
+                    <a href="/myTrainings"><li>MI LISTA DE RUTINAS</li></a>
+                {{/admin}}
+                <a href="/trainings/createTraining"><li>CREAR RUTINA</li></a>
+            {{/logged}}
+
+            <a href="/index"><li>ATRAS</li></a>
+        </ul>
+    </nav>
+</header>
+
+{{^trainings}}
+    <p class="noRoutines">Todavia no se han agregado rutinas</p>
+{{/trainings}}
+<div class="listNutrition">
+    <div class="list">
+        <h2>Lista de todas las rutinas</h2>
+        <ul>
+            {{#trainings}}
+                <li>
+                    <a href="/trainings/{{this.id}}">{{this.name}}</a>
+                </li>
+            {{/trainings}}
+        </ul>
+    </div>
+</div>
+</body>
+</html>

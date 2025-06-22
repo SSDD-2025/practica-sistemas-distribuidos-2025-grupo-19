@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro de usuario</title>
+    <link rel="stylesheet" href="/css/styleLogin.css">
+    <script>
+        function validateForm() {
+            var user = document.forms["formLogin"]["user"].value;
+            var password = document.forms["formLogin"]["password"].value;
+            if (user === "" || password === "") {
+                alert("Inserta un usuario y una contraseña por favor");
+                return false;
+            }
+            return true;
+        }
+        let flag = true;
+        function visualizeEye() {
+            if(flag){
+                document.getElementById("password").type = "password";
+                document.getElementById("Eye").src = "../images/openEye.png";
+                flag=false;
+            }else{
+                document.getElementById("password").type = "text";
+                document.getElementById("Eye").src = "../images/closeEye.png";
+                flag=true;
+            }
+        }
+
+
+    </script>
+</head>
+<body>
+<div class="loginPage">
+    <div class="upLogin"></div>
+    <div class="containerLogin">
+        <div class="containerFormulary">
+            <div class="titleLogin"><h1>REGISTRARSE</h1></div>
+            <div class="loginFormulary">
+                <form name="formLogin"  action="/register" method="post" onsubmit="return validateForm()">
+                    <input type="text" class="textBox" name="name" placeholder="Name" required>
+                    <br><br>
+                    <input type="email" id="user" name="email" class="textBox" maxlength="20" minlength="6" placeholder="Email" required>
+                    <br><br>
+                    <input type="password" name="password" id="password" class="textBox" maxlength="10" minlength="6" placeholder="Contraseña" required>
+                    <img class="eyeImage" src="../images/openEye.png" alt="google" id="Eye" onclick="visualizeEye()">
+                    <input type="hidden" name="_csrf" value="{{token}}"/>
+                    <br><br>
+                    <input  class="loginBoton" type="submit" value="REGISTRARSE">
+                </form>
+            </div>
+
+        </div>
+        <div>
+            <img src="../images/backgroundLogin.jpg" alt="boxer login" height="auto" width="auto">
+        </div>
+    </div>
+    <div class="downLogin"><h1>GYM-BROS</h1></div>
+</div>
+</body>
+</html>

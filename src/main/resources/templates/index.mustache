@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portada</title>
+    <link rel="stylesheet" href="/css/styleFrontPage.css">
+</head>
+<body>
+<header>
+    <nav>
+        <h2 class="logo"></h2>
+        <ul>
+{{#logged}}
+    {{^admin}}
+            <a href="/account"><li>PERFIL</li></a>
+    {{/admin}}
+{{/logged}}
+{{^logged}}
+        <a href="/login"><li>INICIAR SESION</li></a>
+        <a href="/register"><li>REGISTRARSE</li></a>
+{{/logged}}
+            <a href="/trainings"><li>RUTINA</li></a>
+            <a href="/nutritions"><li>NUTRICION</li></a>
+{{#logged}}
+    <form action="/logout" method="post">
+        <input type="hidden" name="_csrf" value="{{token}}" />
+        <button class="logOutButton" type="submit">Log out</button>
+    </form>
+{{/logged}}
+        </ul>
+    </nav>
+    <div class="banner">
+        <div class="intro">
+            <div></div>
+            <div>
+                <p>Descubre un gimnasio en línea único donde puedes</p>
+                <p>personalizar tus rutinas de entrenamiento con facilidad ¡Crea</p>
+                <p>sesiones adaptadas a tus objetivos y disfruta de una</p>
+                <p>experiencia de fitness a tu medida!</p>
+            </div>
+        </div>
+        <div>
+            <img src="../images/backgroundFontPage.jpg" alt="sportsman">
+        </div>
+    </div>
+</header>
+<div class="choose">
+    <div class="card" style="background: #636e72;color: white">
+        {{#admin}}
+            <a href="/admin" style="color: white"><h2>ADMINISTRADOR</h2></a>
+            <p>Vea la lista de usuarios registrador</p>
+        {{/admin}}
+        {{#logged}}
+            {{^admin}}
+                <a href="/account" style="color: white"><h2>USUARIO</h2></a>
+                <p>Configura tu perfil</p>
+            {{/admin}}
+        {{/logged}}
+        {{^logged}}
+            <a href="/register"><li>REGISTRARSE</li></a>
+        {{/logged}}
+
+    </div>
+    <div class="card" style="color: #d63031;background: white">
+        <a href="/trainings" style="color: #d63031"><h2>RUTINA</h2></a>
+        <p>Añade ejercicios a tu medida</p>
+    </div>
+    <div class="card" style="color: white;background: #d63031">
+        <a href="/nutritions" style="color: white"><h2>NUTRICION</h2></a>
+        <p>Una buena alimentacion te ayudara</p>
+    </div>
+</div>
+<div class="aboutUs">
+    <div class="contactUs">
+        <h2>Contactanos</h2>
+        <li>Correo: GYMBros@gmail.com</li>
+        <br>
+        <li>Tlf: +34626889752</li>
+        <br>
+        <li>Arturo Soria (Madrid Centro)</li>
+    </div>
+    <div class="creators">
+        <h2>Creadores</h2>
+        <li>Victor Candel Casado</li>
+    </div>
+    <div class="socialMedia">
+        <h2>Redes Sociales</h2>
+        <li>Instagram</li>
+        <br>
+        <li>Twitter</li>
+        <br>
+        <li>Tiktok</li>
+    </div>
+</div>
+</body>
+</html>

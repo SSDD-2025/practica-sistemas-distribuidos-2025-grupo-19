@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/css/styleEditRoutine.css">
     <script>
         function goBackwards(){
-            window.location.href = "/routines/{{routine.id}}?userId={{userId}}";
+            window.location.href = "/trainings/{{training.id}}";
         }
         function validateForm(){
             let routineName = document.forms["editForm"]["routineName"].value;
@@ -54,38 +54,39 @@
     </button>
 </div>
 <br>
-<form name="editForm" method="post"  action="/routines/editRoutine/{{routine.id}}?userId={{userId}}">
-<label for="routineName" class="title">Nombre de la rutina</label><br>
-<input id="routineName" name="routineName" type="text" class="field" value="{{routine.routineName}}"
-       placeholder={{routine.routineName}}>
-<br><br>
-<label for="intensity" class="title">Intensidad</label><br>
-<select name="intensity"  class="select" id="intensity">
-    {{#intensities}}
-        <option value="{{intensity}}" {{#selected}}selected{{/selected}}> {{#intensity}}{{.}}{{/intensity}}</option>
-    {{/intensities}}
-</select>
-<br><br>
-<label for="duration" class="title">Duracion de la rutina</label><br>
-<input id="duration" name="duration" type="number" inputmode="numeric" class="numeric"
-       min="1" max="200" value={{routine.duration}} >
-<br><br>
-<label for="exercises" class="title">Ejercicios de la rutina</label><br>
-<textarea name="exercises" class="textarea" id="exercises" rows="10" cols="70" placeholder="{{routine.exercises}}">
-    {{routine.exercises}}
-</textarea>
-<br><br>
-<label for="goal" class="title">Objetivo</label><br>
-<select name="goal"  class="select" id="goal">
-    {{#goals}}
-        <option value="{{goal}}" {{#selected}}selected{{/selected}}>{{#goal}}{{.}}{{/goal}}</option>
-    {{/goals}}
-</select>
-<br><br>
-<span class="lowerButtonsContainer">
-                <button class="cancelButton" type="button" onclick="goBackwards()">Cancelar</button>
-                <button class="saveButton" type="submit">Guardar</button>
-            </span>
+<form name="editForm" method="post"  action="/trainings/editRoutine/{{training.id}}">
+    <input type="hidden" name="_csrf" value="{{token}}"/>
+    <label for="routineName" class="title">Nombre de la rutina</label><br>
+    <input id="routineName" name="name" type="text" class="field" value="{{training.name}}"
+           placeholder={{training.name}}>
+    <br><br>
+    <label for="intensity" class="title">Intensidad</label><br>
+    <select name="intensity"  class="select" id="intensity">
+        {{#intensities}}
+            <option value="{{intensity}}" {{#selected}}selected{{/selected}}> {{#intensity}}{{.}}{{/intensity}}</option>
+        {{/intensities}}
+    </select>
+    <br><br>
+    <label for="duration" class="title">Duracion de la rutina</label><br>
+    <input id="duration" name="duration" type="number" inputmode="numeric" class="numeric"
+           min="1" max="200" value={{training.duration}} >
+    <br><br>
+    <label for="exercises" class="title">Ejercicios de la rutina</label><br>
+    <textarea name="exercises" class="textarea" id="exercises" rows="10" cols="70" placeholder="{{training.exercises}}">
+        {{training.exercises}}
+    </textarea>
+    <br><br>
+    <label for="goal" class="title">Objetivo</label><br>
+    <select name="goal"  class="select" id="goal">
+        {{#goals}}
+            <option value="{{goal}}" {{#selected}}selected{{/selected}}>{{#goal}}{{.}}{{/goal}}</option>
+        {{/goals}}
+    </select>
+    <br><br>
+    <span class="lowerButtonsContainer">
+                    <button class="cancelButton" type="button" onclick="goBackwards()">Cancelar</button>
+                    <button class="saveButton" type="submit">Guardar</button>
+                </span>
 </form>
 </body>
 </html>

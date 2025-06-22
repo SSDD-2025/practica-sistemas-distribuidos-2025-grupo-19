@@ -2,12 +2,18 @@ package ssdd.practicaWeb.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import ssdd.practicaWeb.entities.Food;
-import ssdd.practicaWeb.entities.GymUser;
-import ssdd.practicaWeb.entities.Nutrition;
-import ssdd.practicaWeb.repositories.FoodRepository;
-import ssdd.practicaWeb.repositories.NutritionRepository;
+import org.springframework.transaction.annotation.Transactional;
+import ssdd.practicaWeb.dto.NutritionDTO;
+import ssdd.practicaWeb.dto.NutritionMapper;
+import ssdd.practicaWeb.model.Food;
+import ssdd.practicaWeb.model.User;
+import ssdd.practicaWeb.model.Nutrition;
+import ssdd.practicaWeb.repository.FoodRepository;
+import ssdd.practicaWeb.repository.NutritionRepository;
+import ssdd.practicaWeb.repository.UserRepository;
 
 import java.util.*;
 
@@ -16,14 +22,20 @@ public class NutritionService {
 
     @Autowired
     private NutritionRepository nutritionRepository;
+
     @Autowired
     private FoodRepository foodRepository;
+
     @Autowired
     private FoodService foodService;
-    @Autowired
-    private UserService userService;
 
-    public Nutrition createNutrition(Nutrition nutrition, GymUser user) {
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private NutritionMapper nutritionMapper;
+
+    public Nutrition createNutrition(Nutrition nutrition, User user) {
         Nutrition nutrition1 = new Nutrition(nutrition.getName(),nutrition.getType(),new ArrayList<>());
         if(nutrition.getListFoods() != null){
             for(Food food: nutrition.getListFoods()){
@@ -35,7 +47,7 @@ public class NutritionService {
                 }
             }
         }
-        nutrition1.setGymUser(user);
+        nutrition1.setUser(user);
         nutritionRepository.save(nutrition1);
         return nutrition1;
     }
@@ -50,71 +62,31 @@ public class NutritionService {
         }
     }
 
-    public Collection<Nutrition> getAll(Long id) {
-        Optional<List<Nutrition>> listNutritionUser = nutritionRepository.findByGymUser(userService.getGymUser(id));
-        if(listNutritionUser.isPresent()){
-            return listNutritionUser.get();
-        }
-        return null;
+    public List<Nutrition> getAllNutritions() {
+        List<Nutrition> listNutrition = nutritionRepository.findAll();
+        return listNutrition.isEmpty() ? null : listNutrition;
     }
 
-    public Nutrition updateNutritionPatch(Long nutritionId, Nutrition nutrition, GymUser user) {
-        Optional<Nutrition> theNutrition = nutritionRepository.findById(nutritionId);
-        if(theNutrition.isPresent()) {
-            Nutrition nutrition1 = theNutrition.get();
-            nutrition.setGymUser(user);
-            nutrition.setId(nutritionId);
 
-            //
-            if(nutrition.getListFoods() != null){
-
-                for(Food food: nutrition.getListFoods()){
-                    Optional<Food> foodAUX = foodRepository.findByName(food.getName());//getId()
-                    Food f = foodService.getFood(food.getId());
-                    if(foodAUX.isPresent()){
-                        addFood(nutrition1,foodAUX.get());
-                    }else{
-                        food = new Food(food.getName(),food.getType(),0);
-                        food.setListNutritions(new ArrayList<>());
-                        food.setId(f.getId());
-                        Food newFood = foodService.createFood(food);
-                        addFood(nutrition1,newFood);
-                    }
-                }
-            }
-            nutrition.setListFoods(nutrition1.getListFoods());
-            nutritionRepository.save(nutrition);
-            //
-            return nutrition;
-        }
-        return null;
-    }
-
-    public Nutrition updateNutrition(Long nutritionId, Nutrition nutrition, GymUser user) {
+    public Nutrition updateNutrition(Long nutritionId, Nutrition nutrition) {
         Optional<Nutrition> theNutrition = nutritionRepository.findById(nutritionId);
 
         if (theNutrition.isPresent()) {
             Nutrition existingNutrition = theNutrition.get();
 
-            existingNutrition.setGymUser(user);
+            existingNutrition.setUser(nutrition.getUser());
             existingNutrition.setName(nutrition.getName());
             existingNutrition.setType(nutrition.getType());
 
-            // keep the previews foods list
-            List<Food> existingFoods = existingNutrition.getListFoods();
-
-            for (Food food : existingFoods) {
-                if (foodService.getFood(food.getName()) == null) {
-                    return null;  // If any food doesn`t exit, we cancel the operation
+            if(nutrition.getListFoods() != null){ //Change listFood only if user had introduced any food
+                for (Food food : nutrition.getListFoods()) {
+                    if (foodService.getFood(food.getName()) == null) {
+                        return null;  // If any food doesn`t exit, we cancel the operation
+                    }
                 }
-            }
 
-            // Agregar solo nuevas foods sin duplicar
-            for (Food food : existingFoods) {
-                Food f = foodService.getFood(food.getName());
-                if (!existingNutrition.getListFoods().contains(f)) {
-                    addFood(existingNutrition, f);
-                }
+                existingNutrition.setListFoods(nutrition.getListFoods());
+
             }
 
             nutritionRepository.save(existingNutrition);
@@ -149,8 +121,11 @@ public class NutritionService {
                     f.getListNutritions().remove(nutrition);
                 }
             }
-            GymUser user = nutrition.getGymUser();
-            user.getListNutrition().remove(nutrition);
+            List<User> usersWithNutrition = userRepository.findByNutritionListContaining(nutrition);
+            for (User user : usersWithNutrition) {
+                user.getNutritionList().remove(nutrition);
+                userRepository.save(user);
+            }
             nutritionRepository.delete(nutrition);
             return nutrition;
         }
@@ -184,11 +159,122 @@ public class NutritionService {
         }
         nutritionRepository.save(nutrition);
     }
-    public List<Nutrition> getNutritionsUser(GymUser user){
-        Optional<List<Nutrition>> nutritions = nutritionRepository.findByGymUser(user);
+    public List<Nutrition> getNutritionsUser(User user){
+        Optional<List<Nutrition>> nutritions = nutritionRepository.findByUser(user);
         if(nutritions.isPresent()){
             return nutritions.get();
         }
         return null;
+    }
+
+    public void subscribeNutrition(Long id , User user) {
+        Optional<Nutrition> nutrition = nutritionRepository.findById(id);
+        if (nutrition.isPresent()) {
+            user.getNutritionList().add(nutrition.get());
+            userRepository.save(user);
+        }
+    }
+
+    public void unsubscribeNutrition(Long id, User user) {
+        Optional<Nutrition> nutrition = nutritionRepository.findById(id);
+        if (nutrition.isPresent()) {
+            user.getNutritionList().remove(nutrition.get());
+            userRepository.save(user);
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public boolean isOwner(Long nutritionId, Authentication authentication) {
+        return nutritionRepository.findWithUserById(nutritionId)
+                .map(nutrition -> {
+                    User user = nutrition.getUser();
+                    return user != null && authentication.getName().equals(user.getName());
+                })
+                .orElse(false);
+    }
+
+    public  User getAuthenticationUser (){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null ) {
+            Optional<User> user = userRepository.findByEmail(authentication.getName());
+            if (user.isPresent()){
+                return user.get();
+            }
+        }
+        return null;
+    }
+
+    public Collection<NutritionDTO> getAllDtoUserNutritions() {
+        User currentUser = getAuthenticationUser();
+        if (currentUser != null) {
+            List<Nutrition> nutritions = currentUser.getNutritionList();
+
+            return nutritions.stream()
+                    .map(nutritionMapper::toDTO)
+                    .toList();
+        }
+
+        return null;
+    }
+    public NutritionDTO toDTO(Nutrition nutrition) {
+        return nutritionMapper.toDTO(nutrition);
+    }
+
+    public Nutrition toDomain(NutritionDTO nutritionDTO) {
+
+        //return nutritionMapper.toDomain(nutritionDTO);
+        Nutrition nutrition = nutritionMapper.toDomain(nutritionDTO);
+
+        // Cargar las entidades Food usando el repositorio
+        List<Food> foods = foodRepository.findAllById(nutritionDTO.listIdsFood());
+        nutrition.setListFoods(foods);
+
+        // Asignar usuario, si es necesario (también cargado desde repo)
+
+        return nutrition;
+    }
+
+
+    public Collection<NutritionDTO> toDTOs(Collection<Nutrition> nutritions) {
+        return nutritionMapper.toDTOs(nutritions);
+    }
+
+    public NutritionDTO getNutritionDTO(Long id) {
+        return toDTO(nutritionRepository.findById(id).orElseThrow());
+    }
+
+    public Collection<NutritionDTO> getAllNutritionsDTO() {
+        return toDTOs(nutritionRepository.findAll());
+    }
+
+    public boolean subscribeNutritionDTO(Long nutritionId, String name) {
+        User user = userRepository.findByEmail(name)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        Nutrition nutrition = nutritionRepository.findById(nutritionId)
+                .orElseThrow(() -> new IllegalArgumentException("Nutrition not found"));
+
+        if (user.getNutritionList().contains(nutrition)) {
+            return true;
+        }
+
+        user.getNutritionList().add(nutrition);
+        userRepository.save(user);
+        return false;
+    }
+
+    public boolean unsubscribeNutritionDTO(Long nutritionId, String name) {
+        User user = userRepository.findByEmail(name)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        Nutrition nutrition = nutritionRepository.findById(nutritionId)
+                .orElseThrow(() -> new IllegalArgumentException("Nutrition not found"));
+
+        if (!user.getNutritionList().contains(nutrition)) {
+            return false;
+        }
+
+        user.getNutritionList().remove(nutrition);
+        userRepository.save(user);
+        return true;
     }
 }

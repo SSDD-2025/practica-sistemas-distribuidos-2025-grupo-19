@@ -7,7 +7,21 @@
         function deleteNutrition(){
             let confirmation = confirm('¿Estás seguro de querer eliminar esta nutricion?');
             if(confirmation){
-                window.location.href = "/ListNutrition/DeleteNutrition/{{nutrition.id}}?userId={{userId}}";
+                window.location.href = "/nutritions/delete/{{nutrition.id}}";
+            }
+        }
+
+        function subscribeNutrition(){
+            let confirmation = confirm('¿Estás seguro de querer suscribirte a esta dieta?');
+            if(confirmation){
+                window.location.href = "/nutritions/subscribe/{{nutrition.id}}";
+            }
+        }
+
+        function unSubscribeNutrition(){
+            let confirmation = confirm('¿Estás seguro de querer desuscribirte de esta dieta?');
+            if(confirmation){
+                window.location.href = "/nutritions/unsubscribe/{{nutrition.id}}";
             }
         }
     </script>
@@ -15,17 +29,31 @@
 <body>
 <header>
     <nav>
-        <h2 class="logo"></h2>
+        <a href="/index" style="text-decoration: none;">
+            <h2 class="logo"></h2>
+        </a>
         <ul>
-            <a href="/ListNutrition/ModifyNutrition/{{nutrition.id}}?userId={{userId}}">Editar Nutricion</a>
-            <a onclick="deleteNutrition()">Eliminar Nutricion</a>
-            <a href="/ListNutrition?userId={{userId}}">Volver</a>
+            {{#canEdit}}
+                <a href="/nutritions/editNutrition/{{nutrition.id}}">Editar Nutricion</a>
+                <a onclick="deleteNutrition()">Eliminar Nutricion</a>
+            {{/canEdit}}
+            {{#logged}}
+                {{^admin}}
+                    {{#subscribed}}
+                        <a onclick="unSubscribeNutrition()">DESUSCRIBIRSE</a>
+                    {{/subscribed}}
+                    {{^subscribed}}
+                        <a onclick="subscribeNutrition()">SUSCRIBIRSE</a>
+                    {{/subscribed}}
+                {{/admin}}
+            {{/logged}}
+            <a href="/nutritions">Volver</a>
         </ul>
     </nav>
 </header>
 <div class="details">
     <div class="blackSpace"></div>
-    <div class="atributes">
+    <div class="attributes">
         <h1>Nutricion {{nutrition.id}} - {{nutrition.name}}</h1>
         <p>Nombre: {{nutrition.name}}</p>
         <p>Tipo: {{nutrition.type}}</p>
@@ -36,7 +64,9 @@
             {{/nutrition.listFoods}}
         </ul>
         <br><br>
-        <a href="/ListFoods?nutritionId={{nutrition.id}}" class="buttonBlue">Editar alimentos</a>
+        {{#canEdit}}
+            <a href="/listFoods/{{nutrition.id}}" class="buttonBlue">Editar alimentos</a>
+        {{/canEdit}}
         <br><br>
     </div>
     <div class="blackSpace"></div>

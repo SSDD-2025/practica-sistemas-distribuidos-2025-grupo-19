@@ -3,15 +3,16 @@ package ssdd.practicaWeb.service;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ssdd.practicaWeb.entities.Food;
-import ssdd.practicaWeb.entities.GymUser;
-import ssdd.practicaWeb.entities.Nutrition;
-import ssdd.practicaWeb.entities.Routine;
-import ssdd.practicaWeb.repositories.FoodRepository;
-import ssdd.practicaWeb.repositories.NutritionRepository;
-import ssdd.practicaWeb.repositories.RoutineRepository;
-import ssdd.practicaWeb.repositories.UserRepository;
+import ssdd.practicaWeb.model.Food;
+import ssdd.practicaWeb.model.User;
+import ssdd.practicaWeb.model.Nutrition;
+import ssdd.practicaWeb.model.Training;
+import ssdd.practicaWeb.repository.FoodRepository;
+import ssdd.practicaWeb.repository.NutritionRepository;
+import ssdd.practicaWeb.repository.TrainingRepository;
+import ssdd.practicaWeb.repository.UserRepository;
 
 import javax.sql.rowset.serial.SerialBlob;
 import java.io.IOException;
@@ -28,16 +29,13 @@ public class DataBaseInit {
     UserRepository userRepository;
 
     @Autowired
-    UserService userService;
-
-    @Autowired
-    NutritionService nutritionService;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     FoodService foodService;
 
     @Autowired
-    RoutineRepository routineRepository;
+    TrainingRepository routineRepository;
 
     @Autowired
     NutritionRepository nutritionRepository;
@@ -47,6 +45,8 @@ public class DataBaseInit {
 
     @PostConstruct
     public void init() throws IOException, SQLException {
+
+
         Food fresa = new Food("fresa","fruta",33);
         Food nueces = new Food("nueces","fruto seco",654);
         Food huevo = new Food("huevo","alimento proteico",155);
@@ -79,7 +79,11 @@ public class DataBaseInit {
         foodService.createFood(yogurLimon);
         foodService.createFood(costillar);
 
-        GymUser gymUser = new GymUser("victor","123456");
+        User admin = new User("admin", "admin@admin.com", passwordEncoder.encode("adminpass"), "ADMIN", "USER");
+        userRepository.save(admin);
+
+
+        User gymUser = new User("victor","user@user.com", passwordEncoder.encode("pass"),"USER");
         gymUser.setAge(22);
         gymUser.setGender("Masculino");
         gymUser.setHeight(180);
@@ -97,34 +101,52 @@ public class DataBaseInit {
         gymUser.setImgUser(imageBlob0);
         userRepository.save(gymUser);
 
-        Routine routine1 = new Routine("Pecho","Alta",90,"Press de banca : 4x8-10\n" +
+        User gymUser2 = new User("david","david@david.com", passwordEncoder.encode("pass2"),"USER");
+        gymUser2.setAge(26);
+        gymUser2.setGender("Masculino");
+        gymUser2.setHeight(182);
+        gymUser2.setWeight(77);
+        gymUser2.setGoalWeight(82);
+        gymUser2.setMorphology("Ectomorfo");
+        gymUser2.setCaloricPhase("Volumen");
+
+        ClassPathResource imgFile2 = new ClassPathResource("static/images/images.jpeg");
+        byte[] imageBytes2;
+        try (InputStream inputStream = imgFile2.getInputStream()) {
+            imageBytes2 = inputStream.readAllBytes();
+        }
+        Blob imageBlob2 = new SerialBlob(imageBytes2);
+        gymUser2.setImgUser(imageBlob2);
+        userRepository.save(gymUser2);
+
+        Training routine1 = new Training("Pecho","Alta",90,"Press de banca : 4x8-10\n" +
                 "                Press inclinado con mancuernas: 4x10\n" +
                 "                Fondos en paralelas: 3x10\n" +
                 "                Cruces en polea: 4x12" ,"Subir de peso");
-        routine1.setGymUser(gymUser);
+        routine1.setUser(gymUser);
 
-        Routine routine2 = new Routine("Espalda","Alta",90,"Dominadas: 4x8-10\n" +
+        Training routine2 = new Training("Espalda","Alta",90,"Dominadas: 4x8-10\n" +
                 "                Remo con barra: 4x10\n" +
                 "                Jalón al pecho en polea: 3x12\n" +
                 "                Remo con mancuerna: 3x12" ,"Subir de peso");
-        routine2.setGymUser(gymUser);
+        routine2.setUser(gymUser);
 
-        Routine routine3 = new Routine("Cardio","Alta",30,"Crunch en máquina: 4x15\n" +
+        Training routine3 = new Training("Cardio","Alta",30,"Crunch en máquina: 4x15\n" +
         "                Toques de talón (oblicuos): 3x20\n" +
                 "                Rodillo abdominal (ab wheel): 3x10\n" +
                 "                Plancha (estática): 3x45s" ,"Bajar de peso");
-        routine3.setGymUser(gymUser);
+        routine3.setUser(gymUser);
 
         routineRepository.save(routine1);
         routineRepository.save(routine2);
         routineRepository.save(routine3);
 
-        List<Routine> listRoutine = new ArrayList<>();
+        List<Training> listRoutine = new ArrayList<>();
         listRoutine.add(routine1);
         listRoutine.add(routine2);
         listRoutine.add(routine3);
 
-        gymUser.setListRoutine(listRoutine);
+        gymUser.setTrainingList(listRoutine);
 
         List<Food> foods1 = new ArrayList<>();
         foods1.add(fresa);
@@ -143,14 +165,15 @@ public class DataBaseInit {
         Nutrition nutrition1 = new Nutrition();
         nutrition1.setName("Deficit");
         nutrition1.setType("Deficit Calorico");
-        nutrition1.setGymUser(gymUser);
+        nutrition1.setUser(gymUser);
+        nutrition1.setListFoods(foods1);
         nutritionRepository.save(nutrition1);
 
 
         Nutrition nutrition2 = new Nutrition();
         nutrition2.setName("Superavit");
         nutrition2.setType("Deficit Calorico");
-        nutrition2.setGymUser(gymUser);
+        nutrition2.setUser(gymUser);
         nutritionRepository.save(nutrition2);
 
         nutrition1.setListFoods(foods1);
@@ -177,7 +200,7 @@ public class DataBaseInit {
         listNutrition.add(nutrition1);
         listNutrition.add(nutrition2);
 
-        gymUser.setListNutrition(listNutrition);
+        gymUser.setNutritionList(listNutrition);
 
 
         userRepository.save(gymUser);

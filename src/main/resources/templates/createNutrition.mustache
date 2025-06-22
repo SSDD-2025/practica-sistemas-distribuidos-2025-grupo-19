@@ -27,7 +27,7 @@
     <nav>
         <h2 class="logo"></h2>
         <ul>
-            <a href="/ListNutrition?userId={{userId}}"><li>VOLVER</li></a>
+            <a href="/nutritions"><li>VOLVER</li></a>
         </ul>
     </nav>
 </header>
@@ -38,7 +38,8 @@
         {{#succesfull}}
             <p>Nutricion creada</p>
         {{/succesfull}}
-        <form name="formUpdateNutrition" action="/ListNutrition/CreateNutrition?userId={{userId}}" method="post" >
+        <form name="formUpdateNutrition" action="/nutritions/createNutrition" method="post" >
+        <input type="hidden" name="_csrf" value="{{token}}"/>
         <label for="name">Nombre:</label>
         <input type="text" id="name" name="name" required><br><br>
         <label for="type">Tipo:</label>

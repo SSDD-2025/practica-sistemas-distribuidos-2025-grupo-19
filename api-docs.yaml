@@ -1,0 +1,1112 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: https://localhost:8443
+  description: Generated server url
+paths:
+  /api/users/{id}:
+    get:
+      tags:
+      - user-rest-controller
+      summary: Get a user by its id
+      operationId: getUserById
+      parameters:
+      - name: id
+        in: path
+        description: User id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Found the user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid id supplied
+        "401":
+          description: User not authorized
+        "403":
+          description: Access denied
+        "404":
+          description: User not found
+    put:
+      tags:
+      - user-rest-controller
+      summary: Update a user by its id
+      operationId: replaceUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "200":
+          description: User updated correctly
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: User not updated
+        "403":
+          description: User not authorized
+    delete:
+      tags:
+      - user-rest-controller
+      summary: Deletes a user by its id
+      operationId: deleteUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: User deleted correctly
+        "400":
+          description: Bad request
+        "401":
+          description: User not authorized
+        "403":
+          description: User not authorized
+        "404":
+          description: User not found
+  /api/users/{id}/image:
+    get:
+      tags:
+      - user-rest-controller
+      summary: Gets the image of a user by its id
+      operationId: getUserImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Found the user image
+        "400":
+          description: Invalid id supplied
+        "401":
+          description: User not authorized
+        "404":
+          description: "User not found, user image not found or doesn't have permission\
+            \ to access it"
+    put:
+      tags:
+      - user-rest-controller
+      summary: Updates the image of a user
+      operationId: replaceUserImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  format: binary
+              required:
+              - imageFile
+      responses:
+        "201":
+          description: Image created correctly
+        "204":
+          description: Image updated correctly
+        "400":
+          description: Bad request
+        "401":
+          description: User not authorized
+        "403":
+          description: User not authorized
+        "404":
+          description: User not found
+    delete:
+      tags:
+      - user-rest-controller
+      summary: Delete user image
+      operationId: deleteUserImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: User image deleted
+        "403":
+          description: "Forbidden: You are not allowed to delete this user image"
+        "404":
+          description: User image not found
+        "500":
+          description: Internal server error
+  /api/trainings/{id}:
+    put:
+      tags:
+      - training-rest-controller
+      summary: Replace a training
+      operationId: updateTraining
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TrainingDTO"
+        required: true
+      responses:
+        "200":
+          description: Training replaced
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrainingDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "404":
+          description: Training not found
+        "500":
+          description: Internal server error
+    delete:
+      tags:
+      - training-rest-controller
+      summary: Delete a training
+      operationId: deleteTraining
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Training deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrainingDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "404":
+          description: Training not found
+        "500":
+          description: Internal server error
+  /api/nutritions/{id}:
+    get:
+      tags:
+      - nutrition-rest-controller
+      summary: Get a nutrition by ID
+      operationId: getNutrition
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Nutrition found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NutritionDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "404":
+          description: Nutrition not found
+        "500":
+          description: Internal server error
+    put:
+      tags:
+      - nutrition-rest-controller
+      summary: Edit a nutrition by ID
+      operationId: updateNutrition
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NutritionDTO"
+        required: true
+      responses:
+        "200":
+          description: Nutrition updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NutritionDTO"
+        "400":
+          description: Bad request - Invalid input data
+        "401":
+          description: Unauthorized access
+        "403":
+          description: Forbidden - You don't have permission to edit
+        "404":
+          description: Nutrition not found
+        "500":
+          description: Internal server error
+    delete:
+      tags:
+      - nutrition-rest-controller
+      summary: Delete a nutrition by ID
+      operationId: deleteNutrition
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Nutrition deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NutritionDTO"
+        "401":
+          description: Unauthorized access
+        "403":
+          description: Forbidden - You don't have permission to delete
+        "404":
+          description: Nutrition not found
+        "500":
+          description: Internal server error
+  /api/foods/{foodId}:
+    get:
+      tags:
+      - food-rest-controller
+      summary: Get a food by ID
+      operationId: getTrainingByIdd
+      parameters:
+      - name: foodId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Food found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FoodDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "404":
+          description: Food not found
+        "500":
+          description: Internal server error
+    put:
+      tags:
+      - food-rest-controller
+      summary: Replace a food
+      operationId: replacePost
+      parameters:
+      - name: foodId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FoodDTO"
+        required: true
+      responses:
+        "200":
+          description: Food replaced
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FoodDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "404":
+          description: Food not found
+        "500":
+          description: Internal server error
+    delete:
+      tags:
+      - food-rest-controller
+      summary: Delete a food
+      operationId: deleteFood
+      parameters:
+      - name: foodId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Food deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FoodDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "404":
+          description: Food not found
+        "500":
+          description: Internal server error
+  /api/users/new:
+    post:
+      tags:
+      - user-rest-controller
+      summary: Registers a new user
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "201":
+          description: User registered correctly
+        "400":
+          description: "Bad request, maybe one of the user attributes is missing or\
+            \ the type is not valid"
+        "409":
+          description: User already exists
+  /api/trainings/unsubscribed/{id}:
+    post:
+      tags:
+      - training-rest-controller
+      summary: Unsubscribe a user from a training
+      operationId: unsubscribeTraining
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: User unsubscribed from training successfully
+        "400":
+          description: Bad request - Invalid input data
+        "401":
+          description: Unauthorized access
+        "404":
+          description: Training or User not found
+        "500":
+          description: Internal server error
+  /api/trainings/subscribed/{id}:
+    post:
+      tags:
+      - training-rest-controller
+      operationId: subscribeTraining
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /api/trainings/:
+    post:
+      tags:
+      - training-rest-controller
+      summary: Create a training
+      operationId: createTraining
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TrainingDTO"
+        required: true
+      responses:
+        "201":
+          description: Training created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrainingDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "500":
+          description: Internal server error
+  /api/nutritions/unsubscribed/{nutritionId}:
+    post:
+      tags:
+      - nutrition-rest-controller
+      summary: Unsubscribe a user from a nutrition
+      operationId: unsubscribeNutrition
+      parameters:
+      - name: nutritionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: User unsubscribed from nutrition successfully
+        "400":
+          description: Bad request - Invalid input data
+        "401":
+          description: Unauthorized access
+        "404":
+          description: Nutrition or User not found
+        "500":
+          description: Internal server error
+  /api/nutritions/subscribed/{nutritionId}:
+    post:
+      tags:
+      - nutrition-rest-controller
+      summary: Subscribe a user to a nutrition
+      operationId: subscribeNutrition
+      parameters:
+      - name: nutritionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: User subscribed to nutrition successfully
+        "400":
+          description: Bad request - Invalid input data
+        "401":
+          description: Unauthorized access
+        "404":
+          description: Nutrition or User not found
+        "500":
+          description: Internal server error
+  /api/nutritions/:
+    post:
+      tags:
+      - nutrition-rest-controller
+      summary: Create a new nutrition
+      operationId: createNutrition
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NutritionDTO"
+        required: true
+      responses:
+        "201":
+          description: Nutrition created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NutritionDTO"
+        "400":
+          description: Bad request - Invalid input data
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "409":
+          description: Conflict - Nutrition already exists
+        "500":
+          description: Internal server error
+  /api/foods/:
+    post:
+      tags:
+      - food-rest-controller
+      summary: Create a food
+      operationId: createTraining_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FoodDTO"
+        required: true
+      responses:
+        "201":
+          description: Food created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FoodDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "500":
+          description: Internal server error
+  /api/auth/refresh:
+    post:
+      tags:
+      - login-controller
+      operationId: refreshToken
+      parameters:
+      - name: RefreshToken
+        in: cookie
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/auth/logout:
+    post:
+      tags:
+      - login-controller
+      operationId: logOut
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/auth/login:
+    post:
+      tags:
+      - login-controller
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/users/me:
+    get:
+      tags:
+      - user-rest-controller
+      summary: Get authenticated user
+      description: Retrieve the currently authenticated user.
+      operationId: getAuthenticatedUser
+      responses:
+        "200":
+          description: Authenticated user found
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+        "401":
+          description: User not authenticated
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+  /api/users/all:
+    get:
+      tags:
+      - user-rest-controller
+      summary: Get all users
+      operationId: getUsers
+      responses:
+        "200":
+          description: Found all users
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: User not authorized
+        "403":
+          description: Access denied
+        "404":
+          description: Users not found
+  /api/trainings/{trainingId}:
+    get:
+      tags:
+      - training-rest-controller
+      summary: Get a training by ID
+      operationId: getTrainingByIdd_1
+      parameters:
+      - name: trainingId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Training found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrainingDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "404":
+          description: Training not found
+        "500":
+          description: Internal server error
+  /api/trainings/myTrainings:
+    get:
+      tags:
+      - training-rest-controller
+      summary: Get all trainings of user
+      operationId: getUserTrainings
+      responses:
+        "200":
+          description: Found all trainings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrainingDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "404":
+          description: Trainings not found
+        "500":
+          description: Internal server error
+  /api/trainings/all:
+    get:
+      tags:
+      - training-rest-controller
+      summary: Get all trainings
+      operationId: getAllTrainings
+      responses:
+        "200":
+          description: Found all trainings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrainingDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "404":
+          description: Trainings not found
+        "500":
+          description: Internal server error
+  /api/nutritions/myNutritions:
+    get:
+      tags:
+      - nutrition-rest-controller
+      summary: Get all nutritions of user
+      operationId: getUserNutritions
+      responses:
+        "200":
+          description: Found all nutritions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NutritionDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "404":
+          description: Nutritions not found
+        "500":
+          description: Internal server error
+  /api/nutritions/all:
+    get:
+      tags:
+      - nutrition-rest-controller
+      summary: Get all nutritions
+      operationId: getNutritions
+      responses:
+        "200":
+          description: Found all nutritions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Nutrition"
+        "400":
+          description: Bad request - Invalid parametes
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "404":
+          description: Nutritions not found
+        "500":
+          description: Internal server error
+  /api/foods/all:
+    get:
+      tags:
+      - food-rest-controller
+      summary: Get all foods
+      operationId: getAllFoods
+      responses:
+        "200":
+          description: Found all foods
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FoodDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "404":
+          description: Foods not found
+        "500":
+          description: Internal server error
+  /api/foods/{id}:
+    delete:
+      tags:
+      - food-rest-controller
+      operationId: deleteFood_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+components:
+  schemas:
+    UserDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+          readOnly: true
+        email:
+          type: string
+          description: Email address of the user
+          example: john.doe@example.com
+        password:
+          type: string
+          description: Password for authentication (write-only field)
+          writeOnly: true
+        weight:
+          type: number
+          format: double
+        goalWeight:
+          type: number
+          format: double
+        height:
+          type: integer
+          format: int32
+        gender:
+          type: string
+        age:
+          type: integer
+          format: int32
+        morphology:
+          type: string
+        caloricPhase:
+          type: string
+      required:
+      - email
+      - password
+    Food:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        calories:
+          type: integer
+          format: int32
+        type:
+          type: string
+        listNutritions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Nutrition"
+    Nutrition:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          maxLength: 50
+          minLength: 3
+        type:
+          type: string
+        user:
+          $ref: "#/components/schemas/User"
+        listFoods:
+          type: array
+          items:
+            $ref: "#/components/schemas/Food"
+      required:
+      - name
+      - type
+    Training:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          maxLength: 50
+          minLength: 3
+        intensity:
+          type: string
+          pattern: ^(Baja|Moderada|Alta)$
+        duration:
+          type: integer
+          format: int32
+          maximum: 300
+          minimum: 1
+        exercises:
+          type: string
+          maxLength: 500
+          minLength: 0
+        goal:
+          type: string
+          pattern: ^(Bajar de peso|Mantenerse|Subir de peso)$
+        user:
+          $ref: "#/components/schemas/User"
+      required:
+      - exercises
+      - goal
+      - intensity
+      - name
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        imgUser:
+          type: object
+          properties:
+            binaryStream:
+              type: object
+        name:
+          type: string
+          maxLength: 50
+          minLength: 3
+        email:
+          type: string
+        weight:
+          type: number
+          format: double
+          minimum: 1
+        goalWeight:
+          type: number
+          format: double
+          minimum: 1
+        height:
+          type: integer
+          format: int32
+          maximum: 300
+          minimum: 1
+        gender:
+          type: string
+        age:
+          type: integer
+          format: int32
+          maximum: 150
+          minimum: 1
+        morphology:
+          type: string
+        caloricPhase:
+          type: string
+        nutritionList:
+          type: array
+          items:
+            $ref: "#/components/schemas/Nutrition"
+        trainingList:
+          type: array
+          items:
+            $ref: "#/components/schemas/Training"
+        roles:
+          type: array
+          items:
+            type: string
+      required:
+      - age
+      - caloricPhase
+      - gender
+      - goalWeight
+      - height
+      - morphology
+      - name
+      - weight
+    TrainingDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        intensity:
+          type: string
+        duration:
+          type: integer
+          format: int32
+        exercises:
+          type: string
+        goal:
+          type: string
+        userId:
+          type: integer
+          format: int64
+    NutritionDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        type:
+          type: string
+        userId:
+          type: integer
+          format: int64
+        listIdsFood:
+          type: array
+          items:
+            type: integer
+            format: int64
+    FoodDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        calories:
+          type: integer
+          format: int32
+        type:
+          type: string
+        listIdsNutrition:
+          type: array
+          items:
+            type: integer
+            format: int64
+    AuthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        message:
+          type: string
+        error:
+          type: string
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string

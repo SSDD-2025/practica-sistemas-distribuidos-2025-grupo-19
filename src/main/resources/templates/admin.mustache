@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Perfil de administrador</title>
+    <link rel="stylesheet" href="/css/styleUsers.css">
+    <script>
+
+        function goBackwards(){
+            window.location.href = "/index";
+        }
+        function confirmDelete(userId, userName) {
+            if (confirm(`¿Estás seguro de que deseas eliminar al usuario "${userName}"?`)) {
+                window.location.href = `/admin/delete/${userId}`;
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="goBackButtonContainer">
+    <button type="button" class="goBackButton" onclick="goBackwards()">
+        <img src="/images/goBack.jpg" alt="arrowPreviousPage">
+    </button>
+</div>
+
+<div class="admin-info">
+    <h1>Perfil del Administrador</h1>
+    <p><strong>Nombre:</strong> {{user.name}}</p>
+    <p><strong>Email:</strong> {{user.email}}</p>
+</div>
+
+<h2 class="text-center mb-4">Usuarios Registrados</h2>
+
+<div class="row">
+    {{#users}}
+        <div class="card">
+            <h5>{{name}}</h5>
+            <p>{{email}}</p>
+            <button class="deleteUserButton" onclick="confirmDelete({{id}}, '{{name}}')">Eliminar</button>
+        </div>
+    {{/users}}
+</div>
+
+</body>
+</html>

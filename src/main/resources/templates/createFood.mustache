@@ -25,7 +25,7 @@
     <nav>
         <h2 class="logo"></h2>
         <ul>
-            <a href="/ListFoods?nutritionId={{nutritionId}}"><li>VOLVER</li></a>
+            <a href="/listFoods/{{nutritionId}}"><li>VOLVER</li></a>
         </ul>
     </nav>
 </header>
@@ -36,7 +36,8 @@
         {{#succesfull}}
             <p>Alimento creado</p>
         {{/succesfull}}
-        <form name="formUpdateFood" action="/ListFoods/CreateFood?nutritionId={{nutritionId}}" method="post" onsubmit="return validateForm()">
+        <form name="formUpdateFood" action="/listFoods/createFood/{{nutritionId}}" method="post" onsubmit="return validateForm()">
+        <input type="hidden" name="_csrf" value="{{token}}"/>
         <label for="name">Nombre:</label>
         <input type="text" id="name" name="name"><br><br>
         <label for="type">Tipo:</label>

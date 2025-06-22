@@ -7,7 +7,21 @@
         function deleteRoutine(){
             let confirmation = confirm('¿Estás seguro de querer eliminar esta rutina?');
             if(confirmation){
-                window.location.href = "/routines/delete/{{routine.id}}?userId={{userId}}";
+                window.location.href = "/trainings/delete/{{training.id}}";
+            }
+        }
+
+        function subscribeTraining(){
+            let confirmation = confirm('¿Estás seguro de querer suscribirte a esta rutina?');
+            if(confirmation){
+                window.location.href = "/trainings/subscribe/{{training.id}}";
+            }
+        }
+
+        function unSubscribeTraining(){
+            let confirmation = confirm('¿Estás seguro de querer desuscribirte de esta rutina?');
+            if(confirmation){
+                window.location.href = "/trainings/unsubscribe/{{training.id}}";
             }
         }
     </script>
@@ -15,23 +29,38 @@
 <body>
 <header>
     <nav>
+        <a href="/index" style="text-decoration: none;">
+            <h2 class="logo"></h2>
+        </a>
         <ul class="list">
-            <a href="/routines/editRoutine/{{routine.id}}?userId={{userId}}">Editar Rutina</a>
-            <a onclick="deleteRoutine()" >Eliminar Rutina</a>
-            <a href="/routines?userId={{userId}}">Volver a las rutinas</a>
+            {{#canEdit}}
+                <a href="/trainings/editRoutine/{{training.id}}">Editar Rutina</a>
+                <a onclick="deleteRoutine()" >Eliminar Rutina</a>
+            {{/canEdit}}
+            {{#logged}}
+                {{^admin}}
+                    {{#subscribed}}
+                        <a onclick="unSubscribeTraining()">DESUSCRIBIRSE</a>
+                    {{/subscribed}}
+                    {{^subscribed}}
+                        <a onclick="subscribeTraining()">SUSCRIBIRSE</a>
+                    {{/subscribed}}
+                {{/admin}}
+            {{/logged}}
+            <a href="/trainings">Volver a las rutinas</a>
         </ul>
     </nav>
 </header>
 <div class="details">
     <div class="blackSpace"></div>
-    <div class="atributes">
-        <h1>Rutina {{routine.id}} - {{routine.routineName}}</h1>
-        <p>Nombre: {{routine.routineName}}</p>
-        <p>Intensidad: {{routine.intensity}}</p>
-        <p>Duración: {{routine.duration}}</p>
+    <div class="attributes">
+        <h1>Rutina {{training.id}} - {{training.name}}</h1>
+        <p>Nombre: {{training.name}}</p>
+        <p>Intensidad: {{training.intensity}}</p>
+        <p>Duración: {{training.duration}}</p>
         <p>Ejercicios:</p>
-        <p>{{routine.exercises}}</p>
-        <p>Objetivo: {{routine.goal}}</p>
+        <p>{{training.exercises}}</p>
+        <p>Objetivo: {{training.goal}}</p>
     </div>
     <div class="blackSpace"></div>
 </div>

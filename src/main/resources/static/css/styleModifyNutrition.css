@@ -65,3 +65,16 @@ ul a:hover{
     margin-top: 200px;
     text-align: center;
 }
+
+.logo a {
+    text-decoration: none;
+    display: flex;
+}
+
+.gym {
+    color: black;
+}
+
+.bros {
+    color: white;
+}

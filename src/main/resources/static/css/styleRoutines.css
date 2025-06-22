@@ -54,8 +54,8 @@
     text-align: center;
 }
 body{
-    background-color: #333;
-    font-family: Arial, serif;
+    background-color: black;
+    font-family: sans-serif;
 }
 #goToMenuButton{
     border-radius: 5px;
@@ -85,4 +85,79 @@ body{
 }
 .goToMenu {
     margin-left: 10px;
+}
+
+nav ul{
+    display: flex;
+    align-items: center;
+    height: 60px;
+}
+nav ul a{
+    text-decoration: none;
+    color: white;
+    margin: 0 2rem;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+}
+nav ul li{
+    list-style: none;
+}
+nav ul a:hover{
+    color: #d63031;
+}
+.listNutrition{
+    display: flex;
+    justify-content: center;
+}
+.blackSpace{
+    background-color: black;
+    width: 33.3%;
+    height: auto;
+    margin-top: 200px;
+}
+.list{
+    background: linear-gradient(to bottom, #636e72 , lightslategray, #636e72);
+    width: 66.6%;
+    height: auto;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-weight: 700;
+    list-style: none;
+    font-size: 18px;
+    line-height: 2.2;
+}
+
+.list ul li {
+    list-style: none;
+
+}
+.list ul a{
+    text-decoration: none;
+    color: white;
+}
+.list ul a:hover{
+    color: #d63031;
+}
+.list h2{
+    color: white;
+}
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55px;
+    width: 15%;
+    font-weight: 700;
+    background-color: #d63031;
+}
+.logo::before{
+    content: "GYM";
+    color: black;
+}
+.logo::after{
+    content: "Bros";
+    color: white;
 }

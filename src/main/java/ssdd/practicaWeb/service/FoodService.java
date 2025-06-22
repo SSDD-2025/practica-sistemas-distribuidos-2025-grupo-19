@@ -1,10 +1,11 @@
 package ssdd.practicaWeb.service;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ssdd.practicaWeb.entities.Food;
-import ssdd.practicaWeb.repositories.FoodRepository;
+import ssdd.practicaWeb.dto.FoodDTO;
+import ssdd.practicaWeb.dto.FoodMapper;
+import ssdd.practicaWeb.model.Food;
+import ssdd.practicaWeb.repository.FoodRepository;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -13,6 +14,9 @@ import java.util.Optional;
 public class FoodService {
     @Autowired
     FoodRepository foodRepository;
+
+    @Autowired
+    FoodMapper foodMapper;
 
 
 
@@ -59,6 +63,26 @@ public class FoodService {
             return food;
         }
         return null;
+    }
+
+    public Collection<FoodDTO> getAllDtoFoods(){
+        return foodMapper.toDTOs(foodRepository.findAll());
+    }
+
+    public FoodDTO getDtoFood(long foodId){
+        return foodMapper.toDTO(foodRepository.findById(foodId).get());
+    }
+
+    public FoodDTO toDTO(Food food) {
+        return foodMapper.toDTO(food);
+    }
+
+    public Food toDomain(FoodDTO foodDTO) {
+        return foodMapper.toDomain(foodDTO);
+    }
+
+    private Collection<FoodDTO> toDTOs(Collection<Food> foods) {
+        return foodMapper.toDTOs(foods);
     }
 }
 
