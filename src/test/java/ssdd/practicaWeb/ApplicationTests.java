@@ -3,9 +3,7 @@ package ssdd.practicaWeb;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import ssdd.practicaWeb.RunApplication;
-
-@SpringBootTest(classes = RunApplication.class)
+@SpringBootTest(classes = Application.class)
 class ApplicationTests {
 
 	@Test
