@@ -150,7 +150,7 @@ If you prefer using Cloud Native Buildpacks:
 Command:
 
 ```bash
-./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=vcandel/gymbrosdb:latest
+mvn spring-boot:build-image -Dspring-boot.build-image.imageName=vcandel/gymbrosdb:latest
 ```
 Then push it to DockerHub:
 
