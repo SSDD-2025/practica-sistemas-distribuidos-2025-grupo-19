@@ -1,0 +1,16 @@
+services:
+  web:
+    image: vcandel/gymbrosdb:1.0.0
+    ports:
+      - "8443:8443"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://sidi19-2:3306/gymbrosdb
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=pass
+    depends_on:
+      - wait-for-db
+    restart: unless-stopped
+
+  wait-for-db:
+    image: busybox:latest
+    command: sh -c "until nc -z sidi19-2 3306; do echo esperando db...; sleep 2; done;"
