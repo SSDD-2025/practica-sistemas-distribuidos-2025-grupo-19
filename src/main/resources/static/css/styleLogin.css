@@ -66,3 +66,21 @@ body{
     width: 20px;
     transform: translateY(+3px);
 }
+.register-hint {
+    text-align: center;
+    margin-top: 1.2rem;
+    font-size: 1rem;
+    color: #ccc;
+    text-shadow: 1px 1px 2px black;
+}
+
+.register-hint a {
+    color: lightskyblue;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-hint a:hover {
+    text-decoration: underline;
+    color: #00bfff;
+}

@@ -188,7 +188,7 @@ public class NutritionService {
         return nutritionRepository.findWithUserById(nutritionId)
                 .map(nutrition -> {
                     User user = nutrition.getUser();
-                    return user != null && authentication.getName().equals(user.getName());
+                    return user != null && authentication.getName().equals(user.getEmail());
                 })
                 .orElse(false);
     }

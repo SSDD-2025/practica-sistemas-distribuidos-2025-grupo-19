@@ -54,7 +54,7 @@
     </button>
 </div>
 <br>
-<form name="editForm" method="post"  action="/trainings/editRoutine/{{training.id}}">
+<form name="editForm" method="post"  action="/trainings/editTraining/{{training.id}}">
     <input type="hidden" name="_csrf" value="{{token}}"/>
     <label for="routineName" class="title">Nombre de la rutina</label><br>
     <input id="routineName" name="name" type="text" class="field" value="{{training.name}}"

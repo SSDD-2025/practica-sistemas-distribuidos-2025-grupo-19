@@ -62,6 +62,22 @@ public class TrainingRESTController {
         return trainingService.getDtoTraining(trainingId);
     }
 
+    @Operation(summary = "Get paginated trainings")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Trainings retrieved successfully", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = TrainingDTO.class)) }),
+            @ApiResponse(responseCode = "400", description = "Bad request - Invalid pagination parameters", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
+    @GetMapping("/paginated")
+    public ResponseEntity<List<TrainingDTO>> getPaginatedTrainings(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "2") int limit) {
+
+        List<TrainingDTO> trainingDTOs = trainingService.getPaginatedTrainingsDTO(page, limit);
+        return ResponseEntity.ok(trainingDTOs);
+    }
+
     @Operation(summary = "Get all trainings of user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found all trainings", content = {

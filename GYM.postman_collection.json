@@ -438,7 +438,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"gera\",\r\n    \"weight\": 70,\r\n    \"goalWeight\": 80,\r\n    \"height\": 175,\r\n    \"gender\": \"Masculino\",\r\n    \"age\": 22,\r\n    \"morphology\": \"ectomorfo\",\r\n    \"caloricPhase\": \"volumen\"\r\n}",
+							"raw": "{\r\n    \"name\": \"beatriz\",\r\n    \"email\": \"beatriz@beatriz\",\r\n    \"weight\": 70,\r\n    \"goalWeight\": 80,\r\n    \"height\": 175,\r\n    \"gender\": \"Masculino\",\r\n    \"age\": 22,\r\n    \"morphology\": \"ectomorfo\",\r\n    \"caloricPhase\": \"volumen\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -446,16 +446,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/users/1",
-							"protocol": "http",
+							"raw": "https://localhost:8443/api/users/4",
+							"protocol": "https",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8443",
 							"path": [
 								"api",
 								"users",
-								"1"
+								"4"
 							]
 						}
 					},
@@ -470,7 +470,7 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "ImageFile",
+									"key": "imageFile",
 									"type": "file",
 									"src": "/C:/Users/vcand/OneDrive - Universidad Rey Juan Carlos/Escritorio/foto matricula.png"
 								}
@@ -705,6 +705,14 @@
 								"2"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "paginación AJAX",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}

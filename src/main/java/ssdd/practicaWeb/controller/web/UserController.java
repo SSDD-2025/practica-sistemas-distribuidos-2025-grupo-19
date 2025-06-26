@@ -56,7 +56,7 @@ public class UserController {
                 Optional<User> user = userService.findByEmail(principal.getName());
             if (user.isPresent()) {
                 if (user.get().isRole("USER")) {
-                    model.addAttribute("user", true);
+                    model.addAttribute("isUser", true);
                 }
                 if (user.get().isRole("ADMIN")) {
                     model.addAttribute("admin", true);
@@ -169,18 +169,23 @@ public class UserController {
             model.addAttribute("genders",genders);
             model.addAttribute("morphologys",morphologys);
             model.addAttribute("caloricPhases",caloricPhases);
-            model.addAttribute("user",user);
+            model.addAttribute("user",user.get());
             return "edit";
         }
         return "redirect:/index";
     }
 
-    @PostMapping("/account/edit}")
-    public String editProfilePost(@Valid User user, BindingResult result, @RequestParam("imageFile") MultipartFile imageFile, Model model, Principal principal,  HttpServletRequest request) throws IOException {
+    @PostMapping("/account/edit")
+    public String editProfilePost(@Valid User user1, BindingResult result, @RequestParam("imageFile") MultipartFile imageFile, Model model, Principal principal,  HttpServletRequest request) throws IOException {
         Optional<User> existingUser = userService.findByEmail(principal.getName());
         if (result.hasErrors()) {
             model.addAttribute( "mistake", "Por favor, corrige los errores en el formulario.");
-            model.addAttribute("user", existingUser.get());
+            if (existingUser.isPresent()) {
+                model.addAttribute("user", existingUser.get());
+            } else {
+                return "redirect:/index"; //
+            }
+
 
 
             String originalGender = existingUser.get().getGender();
@@ -203,7 +208,7 @@ public class UserController {
             model.addAttribute("genders",genders);
             model.addAttribute("morphologys",morphologys);
             model.addAttribute("caloricPhases",caloricPhases);
-            model.addAttribute("user",existingUser);
+            model.addAttribute("user",existingUser.get());
             return "edit";
         }
         if (existingUser.isEmpty()){
@@ -212,18 +217,18 @@ public class UserController {
         }else{
             User existingUser1 = existingUser.get();
 
-            boolean emailChanged = !existingUser1.getEmail().equals(user.getEmail());
-            existingUser1.setEmail(user.getEmail());
+            boolean emailChanged = !existingUser1.getEmail().equals(user1.getEmail());
+            existingUser1.setEmail(user1.getEmail());
 
-            existingUser1.setName(user.getName());
-            existingUser1.setEmail(user.getEmail());
-            existingUser1.setWeight(user.getWeight());
-            existingUser1.setGoalWeight(user.getGoalWeight());
-            existingUser1.setHeight(user.getHeight());
-            existingUser1.setAge(user.getAge());
-            existingUser1.setGender(user.getGender());
-            existingUser1.setMorphology(user.getMorphology());
-            existingUser1.setCaloricPhase(user.getCaloricPhase());
+            existingUser1.setName(user1.getName());
+            existingUser1.setEmail(user1.getEmail());
+            existingUser1.setWeight(user1.getWeight());
+            existingUser1.setGoalWeight(user1.getGoalWeight());
+            existingUser1.setHeight(user1.getHeight());
+            existingUser1.setAge(user1.getAge());
+            existingUser1.setGender(user1.getGender());
+            existingUser1.setMorphology(user1.getMorphology());
+            existingUser1.setCaloricPhase(user1.getCaloricPhase());
 
             if (imageFile != null && !imageFile.isEmpty()) {
                 existingUser1.setImgUser(BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize()));

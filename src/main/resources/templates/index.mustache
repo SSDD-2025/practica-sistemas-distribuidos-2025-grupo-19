@@ -13,6 +13,10 @@
     {{^admin}}
             <a href="/account"><li>PERFIL</li></a>
     {{/admin}}
+
+    {{#admin}}
+        <a href="/admin"><li>ADMINISTRADOR</li></a>
+    {{/admin}}
 {{/logged}}
 {{^logged}}
         <a href="/login"><li>INICIAR SESION</li></a>

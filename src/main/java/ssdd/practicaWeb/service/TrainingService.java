@@ -1,6 +1,7 @@
 package ssdd.practicaWeb.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -102,13 +103,6 @@ public class TrainingService {
         }
         return null;
     }
-    public List<Training> getRoutinesUser(User user){
-        Optional<List<Training>> routines = trainingRepository.findByUser(user);
-        if(routines.isPresent()){
-            return routines.get();
-        }
-        return null;
-    }
 
     public void subscribeTraining(Long trainingId , User user) {
         Optional<Training> training = trainingRepository.findById(trainingId);
@@ -131,7 +125,7 @@ public class TrainingService {
         return trainingRepository.findWithUserById(trainingId)
                 .map(routine -> {
                     User user = routine.getUser();
-                    return user != null && authentication.getName().equals(user.getName());
+                    return user != null && authentication.getName().equals(user.getEmail());
                 })
                 .orElse(false);
     }
@@ -197,5 +191,12 @@ public class TrainingService {
         user.getTrainingList().remove(training);
         userRepository.save(user);
         return true;
+    }
+
+    public List<TrainingDTO> getPaginatedTrainingsDTO(int page, int limit) {
+        return trainingRepository
+                .findAll(PageRequest.of(page, limit))
+                .map(trainingMapper::toDTO)
+                .toList();
     }
 }

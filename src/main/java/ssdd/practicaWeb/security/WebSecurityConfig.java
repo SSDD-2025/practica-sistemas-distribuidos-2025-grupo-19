@@ -194,13 +194,11 @@ public class WebSecurityConfig {
 						.requestMatchers("/swagger-ui/**").permitAll()
 
 						// PRIVATE PAGES
-						.requestMatchers("/account/**").access(allOf(
-								hasAuthority("ROLE_USER"),
-								not(hasAuthority("ROLE_ADMIN"))
-						))
+
 						.requestMatchers("/nutritions/createNutrition").hasAnyRole("ADMIN", "USER")
 						.requestMatchers("/trainings/createTraining").hasAnyRole("ADMIN", "USER")
 						.requestMatchers("/admin/**").hasAnyRole("ADMIN")
+						.requestMatchers("/account/**").hasAnyRole("USER")
 
 						.requestMatchers("listFoods/editFood/*").hasAnyRole("ADMIN")
 						.requestMatchers("listFoods/deleteFood/*").hasAnyRole("ADMIN")
