@@ -78,9 +78,14 @@ Las principales entidades de la aplicación son:
 ## Diagrama con las entidades de la base de datos
 ![image](https://github.com/user-attachments/assets/d629588d-1e9f-4cad-ade0-2abfac4d74f3)
 
-## Diagrama de clases y templates
+## Diagrama de clases y templates FASE 1
 
 ![image](https://github.com/user-attachments/assets/5fd266c5-22e6-4dbc-aab8-048e6e1a14e9)
+
+## Diagrama de clases y templates FASE 2
+
+![WhatsApp Image 2025-06-26 at 14 00 20](https://github.com/user-attachments/assets/09eed70b-4184-419e-80a6-4445dda6ba49)
+
 
 ## Instrucciones para ejecución
 Descargar Intellij en jetBrains: https://www.jetbrains.com/es-es/idea/download/?section=windows
