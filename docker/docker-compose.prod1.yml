@@ -1,6 +1,6 @@
 services:
   web:
-    image: vcandel/gymbrosdb:1.0.0
+    image: vcandel/gymbrosdb:latest
     ports:
       - "8443:8443"
     environment:
