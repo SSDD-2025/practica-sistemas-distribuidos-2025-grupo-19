@@ -86,7 +86,132 @@ Las principales entidades de la aplicación son:
 Descargar Intellij en jetBrains: https://www.jetbrains.com/es-es/idea/download/?section=windows
 En file->settings->pluggins descargar las siguientes extensiones
 ![image](https://github.com/user-attachments/assets/068c12fc-23b5-46e4-97c0-ac50facf5aa5)
-Presionar con click derecho el pom.xml y darle a "Add as a maven project". El proyecto ya estara listo para ejecutarse, sin embargo hay que lanzar primero la base de datos en MySqlWorkbech (descargar en https://dev.mysql.com/downloads/workbench/), es esta se lanzara en el puerto 3036 en localhost con el nombre gymbrosdb (creando un nuevo schema con dicho nombre). y tras ejecutarse el programa ya se podra observar la base de datos MySql.
+Presionar con click derecho el pom.xml y darle a "Add as a maven project". El proyecto ya estara listo para ejecutarse, sin embargo hay que lanzar primero la base de datos en MySqlWorkbech (descargar en https://dev.mysql.com/downloads/workbench/), es esta se lanzara en el puerto 3036 en localhost con el nombre gymbrosdb (creando un nuevo schema con dicho nombre). y tras ejecutarse el programa ya se podra observar la base de datos MySql. También hay que tener JDK 21.
+
+## 📦 Docker Deployment and Execution Instructions
+
+### 🐳 Execution with Docker Compose
+
+You can run the application using two Docker Compose configurations, depending on the environment:
+
+#### 🔧 Local Development (`docker-compose.local.yml`)
+
+This version builds the Docker image locally using the `Dockerfile`.
+
+**Requirements:**
+- Docker and Docker Compose installed
+
+**Commands:**
+```bash
+docker compose -f docker/docker-compose.local.yml up --build
+```
+Access the app at: https://localhost:8443
+Make sure to accept the self-signed certificate if prompted.
+
+🚀 Production (docker-compose.prod.yml)
+This version pulls the prebuilt image from DockerHub.
+
+Requirements:
+
+Docker and Docker Compose installed
+
+Internet access to DockerHub
+
+Commands:
+
+```bash
+docker compose -f docker/docker-compose.prod.yml up -d
+```
+
+Access the app at: https://localhost:8443
+
+🛠️ Building the Docker Image Locally (Using Dockerfile)
+The image can be built locally using a multi-stage Dockerfile.
+
+Command:
+
+```bash
+bash docker/create_image.ps1
+```
+This script will:
+
+Build the Spring Boot application inside a container
+
+Create an optimized Docker image named: vcandel/gymbrosdb:latest
+
+To publish the image:
+
+```bash
+bash docker/publish_image.ps1
+```
+⚙️ Building the Docker Image with Buildpacks (Spring Boot Native)
+If you prefer using Cloud Native Buildpacks:
+
+Command:
+
+```bash
+./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=vcandel/gymbrosdb:latest
+```
+Then push it to DockerHub:
+
+```bash
+docker push vcandel/gymbrosdb:latest
+```
+🌐 Deployment on University Virtual Machines
+🖥️ sidi19-2 – Deploy MySQL Database
+Steps:
+
+```bash
+ssh sidi19-2
+mkdir -p ~/mysql-deploy && cd ~/mysql-deploy
+nano docker-compose.yml
+```
+Paste the following:
+
+services:
+  db:
+    image: mysql:9.2
+    container_name: mysql-server
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: gymbrosdb
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    restart: unless-stopped
+```bash
+mkdir -p mysql_data
+docker compose up -d
+```
+🖥️ sidi19-1 – Deploy Web Application
+Steps:
+
+```bash
+ssh sidi19-1
+git clone https://github.com/SSDD-2025/practica-sistemas-distribuidos-2025-grupo-19.git
+cd practica-sistemas-distribuidos-2025-grupo-19/docker
+docker compose -f docker-compose.prod1.yml up -d
+```
+Make sure docker-compose.prod1.yml references the database host as sidi19-2.
+
+Access the application via:
+
+🔗 https://193.147.60.59:8443
+
+🌍 Deployed App URL
+📌 URL: https://193.147.60.59:8443
+🔐 Admin credentials:
+
+Email: admin@admin.com
+
+Password: adminpass (cifrada en la configuración)
+
+🙋‍♂️ Example users:
+
+user@user.com / pass
+
+david@david.com / pass2
 
 
 
